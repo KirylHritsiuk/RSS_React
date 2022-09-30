@@ -1,0 +1,22 @@
+.header {
+	background-color: gainsboro;
+	padding: 2%;
+
+	box-shadow: 1px 1px 5px 4px rgba(0, 0, 0, 0.4);
+}
+
+.navbar {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.link {
+	margin-right: 20px;
+	font-size: large;
+	line-height: 26px;
+	font-weight: 500;
+	color: black;
+}
