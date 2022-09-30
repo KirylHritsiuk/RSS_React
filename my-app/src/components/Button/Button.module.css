@@ -1,0 +1,46 @@
+:root {
+	--primary: #7653FC;
+	--gray-light: #EBEBEB;
+	--gray: #A4A4A4;
+	--primary-hover: #3B0DF3;
+	--black: #3B434E;
+	--white: white;
+}
+
+.button {
+	display: inline-block;
+
+	padding: 10px;
+
+	cursor: pointer;
+	transition: all 0.4;
+	text-align: center;
+
+	border: none;
+	border-radius: 20px;
+
+	font-size: 14px;
+}
+
+.primary {
+	color: var(--white);
+	background-color: var(--primary);
+}
+
+.primary:hover {
+	background-color: var(--primary-hover);
+}
+
+.ghost {
+	color: var(--black);
+	border: 1px solid var(--gray-light);
+	background: none;
+}
+
+.ghost:hover {
+	color: var(--white);
+	background-color: var(--primary);
+}
+
+
+
