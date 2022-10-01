@@ -1,6 +1,6 @@
 import Layout from 'components/Layout/Layout';
 import About from 'pages/About';
-import Home from 'pages/Home';
+import Home from 'pages/Home/Home';
 import NotFoundPage from 'pages/NotFoundPage';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
