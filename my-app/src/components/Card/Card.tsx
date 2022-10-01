@@ -8,6 +8,7 @@ import Button from 'components/Button/Button';
 
 class Card extends React.Component<CardProps> {
   data: ICatalog;
+
   constructor(props: CardProps) {
     super(props);
     this.data = this.props.data;

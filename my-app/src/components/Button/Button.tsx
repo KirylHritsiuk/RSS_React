@@ -4,10 +4,6 @@ import cn from 'classnames';
 import styles from './Button.module.css';
 
 class Button extends React.Component<ButtonProps> {
-  constructor(props: ButtonProps) {
-    super(props);
-  }
-
   render() {
     const { className, appearance, children } = this.props;
     return (

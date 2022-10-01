@@ -10,13 +10,37 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;
+	gap: 20px;
 	justify-content: space-between;
+	margin: 0 auto;
+}
+
+.navbar:first-child {
+	color: blue;
+	margin-right: auto;
+}
+
+.menu {
+	display: flex;
+	gap: 20px;
+	color: red;
 }
 
 .link {
-	margin-right: 20px;
 	font-size: large;
 	line-height: 26px;
 	font-weight: 500;
 	color: black;
+	flex-grow: 1;
+}
+
+.link:hover {
+	color: rgb(76, 10, 121);
+}
+
+
+@media screen and (max-width: 585px) {
+	.navbar {
+		justify-content: center;
+	}
 }

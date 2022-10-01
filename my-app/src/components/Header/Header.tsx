@@ -10,7 +10,7 @@ class Header extends React.Component<HeaderProps> {
       <header className={styles.header}>
         <nav className={styles.navbar}>
           <Htag tag="h1">Task#1: React.Components</Htag>
-          <div>
+          <div className={styles.menu}>
             <Link className={styles.link} to="/">
               Home
             </Link>
