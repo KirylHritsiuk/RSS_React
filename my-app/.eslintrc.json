@@ -9,7 +9,6 @@
     "extends": [
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "airbnb",
         "prettier",
         "plugin:react-hooks/recommended",
         "plugin:prettier/recommended"
@@ -44,7 +43,9 @@
         "@typescript-eslint/no-explicit-any": "error",
         "@typescript-eslint/no-var-reqiures": "off",
         "react/jsx-uses-react": "off",
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "react/prefer-stateless-function": "off",
+        "@typescript-eslint/no-empty-interface": "off"
     },
     "settings": {
 		"react": {
