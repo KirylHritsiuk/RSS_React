@@ -22,6 +22,10 @@ export class Card extends React.Component<CardProps> {
     return `${this.data.size}″ ${this.data.aspectRatio} ${this.data.resolution} ${this.data.refRate}Hz`;
   }
 
+  getPrice() {
+    return `${this.data.price} BYN`;
+  }
+
   render(): React.ReactNode {
     const data = this.props.data;
     return (
@@ -33,7 +37,7 @@ export class Card extends React.Component<CardProps> {
           {this.getTitle()}
         </Htag>
         <div>{this.getDescription()}</div>
-        <Htag tag="h3">{this.data.price + ' BYN'}</Htag>
+        <Htag tag="h3">{this.getPrice()}</Htag>
         <Button appearance="ghost" className={styles.button}>
           BUY
         </Button>

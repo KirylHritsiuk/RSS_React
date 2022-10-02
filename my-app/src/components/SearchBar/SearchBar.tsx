@@ -17,7 +17,6 @@ export class SearchBar extends React.Component<SearchBarProps> {
 
   componentWillUnmount(): void {
     localStorage.setItem('search', this.state.inputValue);
-    console.log('willUnmount');
   }
 
   onInputChange(e: ChangeEvent<HTMLInputElement>) {
