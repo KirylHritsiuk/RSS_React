@@ -24,6 +24,8 @@
   },
   "include": [
     "./src/**/*", 
-    "styled.d.ts"
+    "styled.d.ts",
+    "svg.d.ts",
+
   ]
 }
