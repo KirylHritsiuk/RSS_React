@@ -1,12 +1,15 @@
-import Htag from 'components/Htag/Htag';
+import { Htag } from 'components';
 import React from 'react';
 
 class About extends React.Component {
   render(): React.ReactNode {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div
+        style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+        data-testId="about-page"
+      >
         <Htag tag="h2">
-          This APP create by{' '}
+          This APP create by
           <a href={'https://gitHub.com/KirylHritsiuk'} target={'_blank'} rel="noreferrer">
             Kiryl Hritsiuk
           </a>

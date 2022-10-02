@@ -1,4 +1,4 @@
-import Layout from 'components/Layout/Layout';
+import Layout from 'Layout/Layout';
 import About from 'pages/About';
 import Home from 'pages/Home/Home';
 import NotFoundPage from 'pages/NotFoundPage';

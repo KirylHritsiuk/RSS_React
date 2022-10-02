@@ -1,12 +1,12 @@
 import React from 'react';
 import { CardProps } from './Card.props';
+import { Htag } from 'components';
+import { ICatalog } from 'dataBase/catalog.interface';
+import { Button } from 'components';
 import styles from './Card.module.css';
 import cn from 'classnames';
-import Htag from 'components/Htag/Htag';
-import { ICatalog } from 'dataBase/catalog.interface';
-import Button from 'components/Button/Button';
 
-class Card extends React.Component<CardProps> {
+export class Card extends React.Component<CardProps> {
   data: ICatalog;
 
   constructor(props: CardProps) {
@@ -41,5 +41,3 @@ class Card extends React.Component<CardProps> {
     );
   }
 }
-
-export default Card;

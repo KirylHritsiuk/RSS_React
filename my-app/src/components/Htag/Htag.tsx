@@ -3,7 +3,7 @@ import styles from './Htag.module.css';
 import { HtagProps } from './Htag.props';
 import cn from 'classnames';
 
-class Htag extends React.Component<HtagProps> {
+export class Htag extends React.Component<HtagProps> {
   render() {
     switch (this.props.tag) {
       case 'h1':
@@ -17,5 +17,3 @@ class Htag extends React.Component<HtagProps> {
     }
   }
 }
-
-export default Htag;

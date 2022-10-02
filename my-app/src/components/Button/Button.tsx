@@ -3,7 +3,7 @@ import { ButtonProps } from './Button.props';
 import cn from 'classnames';
 import styles from './Button.module.css';
 
-class Button extends React.Component<ButtonProps> {
+export class Button extends React.Component<ButtonProps> {
   render() {
     const { className, appearance, children } = this.props;
     return (
@@ -18,5 +18,3 @@ class Button extends React.Component<ButtonProps> {
     );
   }
 }
-
-export default Button;
