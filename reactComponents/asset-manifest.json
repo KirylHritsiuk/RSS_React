@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/kirylhritsiuk-REACT2022Q3/reactComponents/static/css/main.88229821.css",
+    "main.js": "/kirylhritsiuk-REACT2022Q3/reactComponents/static/js/main.a3182f27.js",
+    "static/media/search.svg": "/kirylhritsiuk-REACT2022Q3/reactComponents/static/media/search.f39d722c1ec7ec478d90f50de5082b75.svg",
+    "index.html": "/kirylhritsiuk-REACT2022Q3/reactComponents/index.html",
+    "main.88229821.css.map": "/kirylhritsiuk-REACT2022Q3/reactComponents/static/css/main.88229821.css.map",
+    "main.a3182f27.js.map": "/kirylhritsiuk-REACT2022Q3/reactComponents/static/js/main.a3182f27.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.88229821.css",
+    "static/js/main.a3182f27.js"
+  ]
+}
