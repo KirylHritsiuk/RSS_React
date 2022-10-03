@@ -19,6 +19,7 @@ const data: ICatalog = {
   pro: 'true',
   favorite: 'false',
 };
+
 describe('Card test', () => {
   test('render card', () => {
     render(<Card data={data} />);

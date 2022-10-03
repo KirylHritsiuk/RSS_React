@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { Button } from './Button';
 
-describe('Button render', () => {
+describe('Button component', () => {
   test('render button', () => {
     render(<Button appearance="primary">Click</Button>);
     const buttonElement = screen.getByText(/Click/i);

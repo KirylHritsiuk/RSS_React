@@ -7,11 +7,11 @@ import styles from './SearchBar.module.css';
 
 export class SearchBar extends React.Component<SearchBarProps> {
   state = {
-    inputValue: '',
+    inputValue: localStorage.getItem('search') || '',
   };
 
   componentDidMount(): void {
-    const inputValue = localStorage.getItem('search') || '';
+    const inputValue = this.state.inputValue;
     this.setState({ inputValue });
   }
 
@@ -30,7 +30,7 @@ export class SearchBar extends React.Component<SearchBarProps> {
         <div className={styles.search}>
           <SearchIcon />
           <input
-            data-testId="input"
+            data-testid="input"
             placeholder="Search..."
             className={styles.searchInput}
             onChange={(e) => this.onInputChange(e)}

@@ -4,6 +4,32 @@ import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 import userEvent from '@testing-library/user-event';
 
+const localStorageMock = (function () {
+  let store: Record<string, string> = {};
+
+  return {
+    getItem(key: string) {
+      return store[key];
+    },
+
+    setItem(key: string, value: string) {
+      store[key] = value;
+    },
+
+    clear() {
+      store = {};
+    },
+
+    removeItem(key: string) {
+      delete store[key];
+    },
+
+    keys() {
+      return store;
+    },
+  };
+})();
+
 describe('App component route', () => {
   test('router', () => {
     render(
@@ -30,20 +56,27 @@ describe('App component route', () => {
     expect(screen.getByTestId('404-page')).toBeInTheDocument();
   });
 
-  test('save search value', () => {
+  test('input save value', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/', '/about']}>
         <App />
       </MemoryRouter>
     );
+    const key = 'search';
+    const data = 'input';
+    const homeLink = screen.getByTestId('home-link');
+    const aboutLink = screen.getByTestId('about-link');
 
-    const input = screen.getByTestId('input');
-    fireEvent.change(input, { target: { value: 'test' } });
-    render(
-      <MemoryRouter initialEntries={['/']}>
-        <App />
-      </MemoryRouter>
-    );
-    expect(screen.getByText(/test/i)).toBe(input);
+    userEvent.click(homeLink);
+    const input: HTMLInputElement = screen.getByTestId('input');
+    fireEvent.change(input, { target: { value: data } });
+
+    userEvent.click(aboutLink);
+    expect(screen.getByTestId('about-page')).toBeInTheDocument();
+    expect(localStorage.getItem(key)).toEqual(data);
+
+    userEvent.click(homeLink);
+    expect(screen.getByTestId('home-page')).toBeInTheDocument();
+    expect(input.value).toBe(data);
   });
 });
