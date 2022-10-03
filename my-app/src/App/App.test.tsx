@@ -7,13 +7,10 @@ import userEvent from '@testing-library/user-event';
 describe('App component route', () => {
   test('router', () => {
     render(
-      <MemoryRouter initialEntries={['/', '/about', '/404']}>
+      <MemoryRouter initialEntries={['/', '/about']}>
         <App />
       </MemoryRouter>
     );
-    const NotfoundLink = screen.getByTestId('404-link');
-    userEvent.click(NotfoundLink);
-    expect(screen.getByTestId('404-page')).toBeInTheDocument();
 
     const aboutLink = screen.getByTestId('about-link');
     userEvent.click(aboutLink);

@@ -6,10 +6,10 @@ class About extends React.Component {
     return (
       <div
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-        data-testId="about-page"
+        data-testid="about-page"
       >
         <Htag tag="h2">
-          This APP create by
+          This APP create by{' '}
           <a href={'https://gitHub.com/KirylHritsiuk'} target={'_blank'} rel="noreferrer">
             Kiryl Hritsiuk
           </a>

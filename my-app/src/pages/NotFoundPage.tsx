@@ -6,9 +6,11 @@ class NotFoundPage extends React.Component {
     return (
       <div
         style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-        data-testId="404-page"
+        data-testid="404-page"
       >
-        <Htag tag="h2">404, page Not found!</Htag>
+        <Htag tag="h2">
+          404, page Not found! Please go back to <a href={'/'}>Home</a> page
+        </Htag>
       </div>
     );
   }
