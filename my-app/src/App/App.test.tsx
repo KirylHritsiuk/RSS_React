@@ -4,32 +4,6 @@ import { MemoryRouter } from 'react-router-dom';
 import App from './App';
 import userEvent from '@testing-library/user-event';
 
-const localStorageMock = (function () {
-  let store: Record<string, string> = {};
-
-  return {
-    getItem(key: string) {
-      return store[key];
-    },
-
-    setItem(key: string, value: string) {
-      store[key] = value;
-    },
-
-    clear() {
-      store = {};
-    },
-
-    removeItem(key: string) {
-      delete store[key];
-    },
-
-    keys() {
-      return store;
-    },
-  };
-})();
-
 describe('App component route', () => {
   test('router', () => {
     render(
