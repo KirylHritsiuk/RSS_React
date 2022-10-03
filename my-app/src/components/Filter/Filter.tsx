@@ -6,10 +6,10 @@ import cn from 'classnames';
 export class Filter extends React.Component<FilterProps> {
   render() {
     return (
-      <div className={cn(styles.filter, this.props.className)} data-testId="filter">
+      <div className={cn(styles.filter, this.props.className)}>
         {this.props.names.map((name) => (
           <div className={styles.item} key={name}>
-            <input type="checkbox" name={name} id={name} data-testId={name} />
+            <input type="checkbox" name={name} id={name} data-testid={name} />
             <label htmlFor={name}>{name}</label>
           </div>
         ))}

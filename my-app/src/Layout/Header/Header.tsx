@@ -6,10 +6,8 @@ import styles from './Header.module.css';
 export class Header extends React.Component<HeaderProps> {
   render(): React.ReactNode {
     return (
-      <header className={styles.header} data-testId="header">
-        <Htag tag="h1" data-testId="title">
-          Task#1: React.Components
-        </Htag>
+      <header className={styles.header}>
+        <Htag tag="h1">Task#1: React.Components</Htag>
         <Nav />
       </header>
     );

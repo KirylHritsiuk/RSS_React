@@ -1,17 +1,20 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { Header } from './Header';
 
-describe('Header render', () => {
+describe('Header component', () => {
+  beforeEach(() => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Header />
+      </MemoryRouter>
+    );
+  });
   test('render header', () => {
-    render(<Header />);
-    expect(screen.getByTestId('header')).toBeInTheDocument();
+    expect(screen.getByRole('heading')).toBeInTheDocument();
   });
-  test('render links', () => {
-    render(<Header />);
-    expect(screen.getAllByRole('link')).toBeInTheDocument();
-  });
+
   test('render title', () => {
-    render(<Header />);
-    expect(screen.getByTestId('title')).toBeInTheDocument();
+    expect(screen.getByText(/task/i)).toBeInTheDocument();
   });
 });

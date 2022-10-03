@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { Htag } from './Htag';
 
-describe('Htag render', () => {
+describe('Htag component', () => {
   test('render H1', () => {
     render(<Htag tag="h1">Text</Htag>);
     expect(screen.getByText(/Text/i)).toBeInTheDocument();

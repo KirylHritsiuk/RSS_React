@@ -1,21 +1,25 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import Layout from './Layout';
 
-describe('Layout render', () => {
+describe('Layout component', () => {
+  beforeEach(() => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Layout />
+      </MemoryRouter>
+    );
+  });
+
   test('render header', () => {
-    render(<Layout />);
-    expect(screen.getByTestId('header')).toBeInTheDocument();
+    expect(screen.getByRole('navigation')).toBeInTheDocument();
   });
+
   test('render footer', () => {
-    render(<Layout />);
-    expect(screen.getByTestId('footer')).toBeInTheDocument();
+    expect(screen.getByText('2022')).toBeInTheDocument();
   });
+
   test('render main', () => {
-    render(<Layout />);
-    expect(screen.getByTestId('main')).toBeInTheDocument();
-  });
-  test('render outlet', () => {
-    render(<Layout />);
-    expect(screen.getByTestId('outlet')).toBeInTheDocument();
+    expect(screen.getByRole('main')).toBeInTheDocument();
   });
 });

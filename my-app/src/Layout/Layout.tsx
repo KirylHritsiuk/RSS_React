@@ -7,11 +7,11 @@ class Layout extends React.Component {
   render() {
     return (
       <>
-        <Header data-testId="header" />
-        <main data-testId="main">
-          <Outlet data-testId="outlet" />
+        <Header />
+        <main>
+          <Outlet />
         </main>
-        <Footer data-testId="footer" />
+        <Footer />
       </>
     );
   }

@@ -29,7 +29,7 @@ export class Card extends React.Component<CardProps> {
   render(): React.ReactNode {
     const data = this.props.data;
     return (
-      <div className={cn(styles.card, this.props.className)}>
+      <div className={cn(styles.card, this.props.className)} data-testid="card">
         <div className={styles.image}>
           <img src={data.image} alt={this.data.name} />
         </div>

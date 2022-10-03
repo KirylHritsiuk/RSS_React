@@ -12,14 +12,11 @@ export class Nav extends React.Component<NavProps> {
   render() {
     return (
       <nav className={styles.menu}>
-        <NavLink className={this.setActive} end to="/" data-testId="home-link">
+        <NavLink className={this.setActive} end to="/" data-testid="home-link">
           Home
         </NavLink>
-        <NavLink className={this.setActive} to="/about" data-testId="about-link">
-          About
-        </NavLink>
-        <NavLink className={this.setActive} to="/404" data-testId="404-link">
-          404
+        <NavLink className={this.setActive} to="/about" data-testid="about-link">
+          About Us
         </NavLink>
       </nav>
     );

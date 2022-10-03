@@ -1,19 +1,16 @@
 import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { Nav } from './Nav';
 
-describe('Nav render', () => {
-  test('length', () => {
-    const { container } = render(<Nav />);
-    expect(container.children).toBe(3);
+describe('Nav component', () => {
+  beforeEach(() => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        <Nav />
+      </MemoryRouter>
+    );
   });
-
-//   test('render H2', () => {
-//     render(<Nav >Text</Nav>);
-//     expect(screen.getByText(/Text/i)).toBeInTheDocument();
-//   });
-
-//   test('render H3', () => {
-//     render(<Nav >Text</Nav>);
-//     expect(screen.getByText(/Text/i)).toBeInTheDocument();
-//   });
+  test('length', () => {
+    expect(screen.getAllByRole('link').length).toBe(2);
+  });
 });
