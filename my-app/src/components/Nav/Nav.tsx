@@ -11,13 +11,24 @@ export class Nav extends React.Component<NavProps> {
 
   render() {
     return (
-      <nav className={styles.menu}>
-        <NavLink className={this.setActive} end to="/" data-testid="home-link">
-          Home
-        </NavLink>
-        <NavLink className={this.setActive} to="/about" data-testid="about-link">
-          About Us
-        </NavLink>
+      <nav>
+        <ul className={styles.menu}>
+          <li>
+            <NavLink className={this.setActive} end to="/" data-testid="home-link">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={this.setActive} to="/Form" data-testid="form-link">
+              Form
+            </NavLink>
+          </li>
+          <li>
+            <NavLink className={this.setActive} to="/about" data-testid="about-link">
+              About Us
+            </NavLink>
+          </li>
+        </ul>
       </nav>
     );
   }
