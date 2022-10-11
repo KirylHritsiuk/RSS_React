@@ -186,6 +186,7 @@ export class Form extends React.Component<FormProps, IState> {
         <Select
           name="country"
           defaultValue={0}
+          valueDisabled={true}
           error={this.state.country}
           isDirty={this.state.isDirty}
           errorMessage={'Please, choose country'}

@@ -7,5 +7,6 @@ export interface SelectProps
   errorMessage?: string;
   reference?: React.RefObject<HTMLSelectElement>;
   label?: string;
+  valueDisabled?: boolean;
   options: string[];
 }

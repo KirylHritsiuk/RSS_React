@@ -14,6 +14,7 @@ export class Select extends React.Component<SelectProps> {
       reference,
       onChange,
       options,
+      valueDisabled,
       ...props
     } = this.props;
     return (
@@ -31,9 +32,15 @@ export class Select extends React.Component<SelectProps> {
           {...props}
         >
           {options.map((item, index) => {
-            if (index === this.props.defaultValue) {
+            if (index === this.props.defaultValue && valueDisabled) {
               return (
-                <option key={item} value={index} disabled>
+                <option key={item} value={index} selected disabled>
+                  {item}
+                </option>
+              );
+            } else if (index === this.props.defaultValue) {
+              return (
+                <option key={item} value={index} selected>
                   {item}
                 </option>
               );
