@@ -1,22 +1,48 @@
 import { render, screen } from '@testing-library/react';
-import { ICatalog } from 'dataBase/catalog.interface';
+import { FormCard } from './FormCard';
+import { IFormCard } from './FormCard.interface';
 
-const data: ICatalog = {
-  id: 'el1',
-  brand: 'apple',
-  name: 'Pro',
-  image: './img/content/apple/apple.jpeg',
-  price: '14530.00',
-  year: '2019',
-  size: '32',
-  resolution: '6016x3384',
-  aspectRatio: '16:9',
-  refRate: '60',
-  count: '1',
-  portrait: 'false',
-  gaming: 'false',
-  pro: 'true',
-  favorite: 'false',
+export const FormCardTestData: IFormCard = {
+  name: 'Kiryl',
+  surname: 'Hritsiuk',
+  zipCode: '5555686',
+  birthday: '2000-10-10',
+  country: 'Belarus',
+  gender: 'male',
+  avatar: null,
 };
 
-describe('Card test', () => {});
+describe('Card test', () => {
+  test('render card', () => {
+    render(<FormCard data={FormCardTestData} />);
+    expect(screen.getByTestId('FormCard')).toBeInTheDocument();
+  });
+  test('card img', () => {
+    render(<FormCard data={FormCardTestData} />);
+    expect(screen.getByAltText(FormCardTestData.name)).toBeInTheDocument();
+  });
+  test('card name', () => {
+    render(<FormCard data={FormCardTestData} />);
+    expect(screen.getByText(/Kiryl/)).toBeInTheDocument();
+  });
+  test('card surname', () => {
+    render(<FormCard data={FormCardTestData} />);
+    expect(screen.getByText(/Hritsiuk/)).toBeInTheDocument();
+  });
+  test('card zipCode', () => {
+    render(<FormCard data={FormCardTestData} />);
+    expect(screen.getByText(/5555686/)).toBeInTheDocument();
+  });
+  test('card birthday', () => {
+    render(<FormCard data={FormCardTestData} />);
+    expect(screen.getByText(/2000-10-10/)).toBeInTheDocument();
+  });
+  test('card country', () => {
+    render(<FormCard data={FormCardTestData} />);
+    expect(screen.getByText(/Belarus/)).toBeInTheDocument();
+  });
+  test('card gender', () => {
+    render(<FormCard data={FormCardTestData} />);
+    expect(screen.getByText(/male/)).toBeInTheDocument();
+  });
+});
