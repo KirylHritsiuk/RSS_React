@@ -180,6 +180,7 @@ export class Form extends React.Component<FormProps, IState> {
         <Input
           type="file"
           name="file"
+          accept="image/*"
           reference={this.fileInput}
           onChange={this.onChangeHandler}
           className={styles.file}

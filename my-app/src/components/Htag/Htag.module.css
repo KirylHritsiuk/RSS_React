@@ -26,3 +26,9 @@
 
 	text-transform: capitalize;
 }
+
+@media screen and (max-width: 340px) {
+	.h3 {
+		font-size: 18px;
+	}
+}
