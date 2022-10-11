@@ -5,3 +5,8 @@ export * from './CardList/CardList';
 export * from './Filter/Filter';
 export * from './SearchBar/SearchBar';
 export * from './Nav/Nav';
+export * from './Form/Form';
+export * from './Switcher/Switcher';
+export * from './FormCard/FormCard';
+export * from './Input/Input';
+export * from './Select/Select';
