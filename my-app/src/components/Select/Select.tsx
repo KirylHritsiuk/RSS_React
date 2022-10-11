@@ -1,21 +1,25 @@
 import React from 'react';
 import styles from './Select.module.css';
 import cn from 'classnames';
-import { SelectProps, SelectState } from './Select.props';
+import { SelectProps } from './Select.props';
 
-export class Select extends React.Component<SelectProps, SelectState> {
-  constructor(props: SelectProps) {
-    super(props);
-    this.state = {
-      error: false,
-    };
-  }
+export class Select extends React.Component<SelectProps> {
   render() {
-    const { name, className, errorMessage, reference, onChange, options, ...props } = this.props;
+    const {
+      name,
+      className,
+      error,
+      isDirty,
+      errorMessage,
+      reference,
+      onChange,
+      options,
+      ...props
+    } = this.props;
     return (
       <div
         className={cn(styles.inputWrapper, {
-          [styles.error]: this.state.error,
+          [styles.error]: !error && isDirty,
         })}
       >
         <select
@@ -41,7 +45,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
             );
           })}
         </select>
-        {this.state.error && <span className={styles.errorMessage}>{errorMessage}</span>}
+        {!error && isDirty && <span className={styles.errorMessage}>{errorMessage}</span>}
       </div>
     );
   }

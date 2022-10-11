@@ -143,6 +143,8 @@ export class Form extends React.Component<FormProps, IState> {
           type="text"
           name="name"
           placeholder="Name"
+          error={this.state.name}
+          isDirty={this.state.isDirty}
           errorMessage={'Please, choose correct'}
           reference={this.nameInput}
           onChange={this.onChangeHandler}
@@ -151,6 +153,8 @@ export class Form extends React.Component<FormProps, IState> {
           type="text"
           name="surname"
           placeholder="Surname"
+          error={this.state.surname}
+          isDirty={this.state.isDirty}
           errorMessage={'Please, choose correct'}
           reference={this.surnameInput}
           onChange={this.onChangeHandler}
@@ -159,6 +163,8 @@ export class Form extends React.Component<FormProps, IState> {
           type="number"
           name="zipCode"
           placeholder="Zip-code"
+          error={this.state.zipCode}
+          isDirty={this.state.zipCode}
           errorMessage={'Please, choose correct'}
           reference={this.zipCodeInput}
           onChange={this.onChangeHandler}
@@ -167,6 +173,8 @@ export class Form extends React.Component<FormProps, IState> {
           type="date"
           name="birthday"
           label="Your Birthday"
+          error={this.state.birthday}
+          isDirty={this.state.isDirty}
           errorMessage={'Please, choose correct'}
           reference={this.birthdayInput}
           onChange={this.onChangeHandler}
@@ -174,6 +182,8 @@ export class Form extends React.Component<FormProps, IState> {
         <Select
           name="country"
           defaultValue={0}
+          error={this.state.country}
+          isDirty={this.state.isDirty}
           errorMessage={'Please, choose correct'}
           reference={this.countrySelect}
           onChange={this.onChangeHandler}
@@ -192,6 +202,8 @@ export class Form extends React.Component<FormProps, IState> {
           type="checkbox"
           name="agree"
           className={styles.agree}
+          error={this.state.agree}
+          isDirty={this.state.isDirty}
           label={'I consent to my personal data '}
           errorMessage={'Please, choose correct'}
           onChange={(e) => this.setState({ agree: e.target.checked })}
