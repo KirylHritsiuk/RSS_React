@@ -7,7 +7,7 @@ import userEvent from '@testing-library/user-event';
 describe('App component route', () => {
   test('router', () => {
     render(
-      <MemoryRouter initialEntries={['/', '/about']}>
+      <MemoryRouter initialEntries={['/', '/about', '/form']}>
         <App />
       </MemoryRouter>
     );
@@ -19,6 +19,10 @@ describe('App component route', () => {
     const homeLink = screen.getByTestId('home-link');
     userEvent.click(homeLink);
     expect(screen.getByTestId('home-page')).toBeInTheDocument();
+
+    const formLink = screen.getByTestId('form-link');
+    userEvent.click(formLink);
+    expect(screen.getByTestId('form-page')).toBeInTheDocument();
   });
 
   test('error page', () => {

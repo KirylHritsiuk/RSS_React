@@ -1,6 +1,6 @@
 import React, { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { CardList, Form } from '../../components';
-import { IFormCard } from '../../components/FormCard/FormCard.interface';
+import { CardList, Form } from '../components';
+import { IFormCard } from '../components/FormCard/FormCard.interface';
 
 class FormPage extends React.Component {
   constructor(props: DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>) {
@@ -17,7 +17,7 @@ class FormPage extends React.Component {
   render() {
     const { cardList } = this.state;
     return (
-      <div>
+      <div data-testid={'form-page'}>
         <Form cardList={cardList} addCard={this.addCard} />
         {cardList.length !== 0 && <CardList catalog={cardList} />}
       </div>
