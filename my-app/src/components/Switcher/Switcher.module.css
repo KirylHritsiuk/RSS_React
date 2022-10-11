@@ -18,9 +18,11 @@
 	background: var(--primary);
 	border-radius: 50px;
 	position: relative;
-	transition: background-color .2s;
+	transition: background 0.3s;
   }
-  
+  .label:hover {
+	background: var(--primary-hover);
+  }
   .label .button {
 	content: '';
 	position: absolute;
@@ -38,6 +40,9 @@
 	transform: translateX(-100%);
   }
 
+  .label:hover .button {
+	background-color: var(--red-light);
+  }
   .label:active .button {
 	width: 30px;
 	background-color: var(--red);

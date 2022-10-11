@@ -7,16 +7,15 @@
 	font-size: large;
 	line-height: 26px;
 	font-weight: 500;
-	color: black;
+	color: var(--black);
 	flex-grow: 1;
-	transform: scale(1);
 	transition: all 0.3s;
 }
 
 .link:hover {
-	transform: scale(1.1);
+	color: var(--primary-hover);
 }
 
 .activeLink {
-	color: red;
+	color: var(--primary);
 }
