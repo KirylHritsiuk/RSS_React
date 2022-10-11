@@ -11,7 +11,7 @@ export class Card extends React.Component<CardProps> {
 
   constructor(props: CardProps) {
     super(props);
-    this.data = this.props.data;
+    this.data = this.props?.data;
   }
 
   getTitle() {
