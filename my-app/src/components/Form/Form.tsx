@@ -145,7 +145,7 @@ export class Form extends React.Component<FormProps, IState> {
           placeholder="Name"
           error={this.state.name}
           isDirty={this.state.isDirty}
-          errorMessage={'Please, choose correct'}
+          errorMessage={'Please, input correct name'}
           reference={this.nameInput}
           onChange={this.onChangeHandler}
         />
@@ -155,7 +155,7 @@ export class Form extends React.Component<FormProps, IState> {
           placeholder="Surname"
           error={this.state.surname}
           isDirty={this.state.isDirty}
-          errorMessage={'Please, choose correct'}
+          errorMessage={'Please, input correct surname'}
           reference={this.surnameInput}
           onChange={this.onChangeHandler}
         />
@@ -164,8 +164,8 @@ export class Form extends React.Component<FormProps, IState> {
           name="zipCode"
           placeholder="Zip-code"
           error={this.state.zipCode}
-          isDirty={this.state.zipCode}
-          errorMessage={'Please, choose correct'}
+          isDirty={this.state.isDirty}
+          errorMessage={'Please, input correct zip-code'}
           reference={this.zipCodeInput}
           onChange={this.onChangeHandler}
         />
@@ -175,7 +175,11 @@ export class Form extends React.Component<FormProps, IState> {
           label="Your Birthday"
           error={this.state.birthday}
           isDirty={this.state.isDirty}
-          errorMessage={'Please, choose correct'}
+          max={`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`}
+          min={`${new Date().getFullYear() - 120}-${new Date().getMonth() + 1}-${
+            new Date().getDate() - 1
+          }`}
+          errorMessage={'Sorry, you is so young'}
           reference={this.birthdayInput}
           onChange={this.onChangeHandler}
         />
@@ -184,7 +188,7 @@ export class Form extends React.Component<FormProps, IState> {
           defaultValue={0}
           error={this.state.country}
           isDirty={this.state.isDirty}
-          errorMessage={'Please, choose correct'}
+          errorMessage={'Please, choose country'}
           reference={this.countrySelect}
           onChange={this.onChangeHandler}
           options={[' Choose country', 'Belarus', 'Ukraine', 'Russia']}
@@ -205,7 +209,7 @@ export class Form extends React.Component<FormProps, IState> {
           error={this.state.agree}
           isDirty={this.state.isDirty}
           label={'I consent to my personal data '}
-          errorMessage={'Please, choose correct'}
+          errorMessage={'Please, check agree'}
           onChange={(e) => this.setState({ agree: e.target.checked })}
           reference={this.agreeInput}
         />
