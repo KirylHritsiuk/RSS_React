@@ -47,6 +47,7 @@ export class Form extends React.Component<FormProps, IState> {
       birthday: false,
       country: false,
       agree: false,
+      success: false,
     };
   }
 
@@ -90,7 +91,7 @@ export class Form extends React.Component<FormProps, IState> {
         gender: getGender(form.gender.checked),
         avatar: getAvatar(form),
       });
-      this.setState({ isDirty: false });
+      this.setState({ isDirty: false, success: true });
       this.onReset();
     } else {
       this.setState({ isDirty: true });
@@ -105,21 +106,28 @@ export class Form extends React.Component<FormProps, IState> {
     const country: HTMLSelectElement | null = this.countrySelect.current;
     const file: HTMLInputElement | null = this.fileInput.current;
     const agree: HTMLInputElement | null = this.agreeInput.current;
-    name!.value = '';
-    surname!.value = '';
-    zipCode!.value = '';
-    birthday!.value = '';
-    country!.value = '0';
-    file!.value = '';
-    agree!.checked = false;
+    if (name && surname && zipCode && birthday && country && file && agree) {
+      name.value = '';
+      surname.value = '';
+      zipCode.value = '';
+      birthday.value = '';
+      country.value = '0';
+      file.value = '';
+      agree.checked = false;
+    }
 
-    this.setState({ isDirty: false });
-    this.setState({ name: false });
-    this.setState({ surname: false });
-    this.setState({ zipCode: false });
-    this.setState({ birthday: false });
-    this.setState({ country: false });
-    this.setState({ agree: false });
+    this.setState({
+      isDirty: false,
+      name: false,
+      surname: false,
+      zipCode: false,
+      birthday: false,
+      country: false,
+      agree: false,
+    });
+    setTimeout(() => {
+      this.setState({ success: false });
+    }, 1500);
   }
 
   render() {
@@ -135,7 +143,6 @@ export class Form extends React.Component<FormProps, IState> {
           type="text"
           name="name"
           placeholder="Name"
-          error={true}
           errorMessage={'Please, choose correct'}
           reference={this.nameInput}
           onChange={this.onChangeHandler}
@@ -144,7 +151,6 @@ export class Form extends React.Component<FormProps, IState> {
           type="text"
           name="surname"
           placeholder="Surname"
-          error={true}
           errorMessage={'Please, choose correct'}
           reference={this.surnameInput}
           onChange={this.onChangeHandler}
@@ -153,7 +159,6 @@ export class Form extends React.Component<FormProps, IState> {
           type="number"
           name="zipCode"
           placeholder="Zip-code"
-          error={true}
           errorMessage={'Please, choose correct'}
           reference={this.zipCodeInput}
           onChange={this.onChangeHandler}
@@ -162,7 +167,6 @@ export class Form extends React.Component<FormProps, IState> {
           type="date"
           name="birthday"
           label="Your Birthday"
-          error={true}
           errorMessage={'Please, choose correct'}
           reference={this.birthdayInput}
           onChange={this.onChangeHandler}
@@ -170,7 +174,6 @@ export class Form extends React.Component<FormProps, IState> {
         <Select
           name="country"
           defaultValue={0}
-          error={true}
           errorMessage={'Please, choose correct'}
           reference={this.countrySelect}
           onChange={this.onChangeHandler}
@@ -190,7 +193,6 @@ export class Form extends React.Component<FormProps, IState> {
           name="agree"
           className={styles.agree}
           label={'I consent to my personal data '}
-          error={true}
           errorMessage={'Please, choose correct'}
           onChange={(e) => this.setState({ agree: e.target.checked })}
           reference={this.agreeInput}
@@ -198,6 +200,9 @@ export class Form extends React.Component<FormProps, IState> {
         <Button type="submit" appearance="primary" disabled={this.state.isDirty}>
           SUBMIT
         </Button>
+        <span className={cn(styles.success, { [styles.none]: this.state.success === false })}>
+          success
+        </span>
       </form>
     );
   }

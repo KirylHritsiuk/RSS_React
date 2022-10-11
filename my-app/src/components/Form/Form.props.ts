@@ -26,4 +26,5 @@ export interface IState {
   birthday: boolean;
   country: boolean;
   agree: boolean;
+  success: boolean;
 }
