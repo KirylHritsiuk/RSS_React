@@ -1,6 +1,6 @@
 import Layout from 'Layout/Layout';
 import About from 'pages/About';
-import FormPage from 'pages/Form';
+import FormPage from 'pages/FormPage/FormPage';
 import Home from 'pages/Home/Home';
 import NotFoundPage from 'pages/NotFoundPage';
 import React from 'react';

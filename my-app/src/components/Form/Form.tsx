@@ -78,19 +78,20 @@ export class Form extends React.Component<FormProps, IState> {
   handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const { cardList } = this.props;
     const form = e.currentTarget as HTMLFormElement & FormFields;
 
     if (isAllFieldsValid(this.state)) {
-      this.props.addCard(cardList, {
-        name: form.name.value,
-        surname: form.surname.value,
-        zipCode: form.zipCode.value,
-        birthday: form.birthday.value,
-        country: form.country.value,
-        gender: getGender(form.gender.checked),
-        avatar: getAvatar(form),
-      });
+      if (this.props.addCard) {
+        this.props.addCard({
+          name: form.name.value,
+          surname: form.surname.value,
+          zipCode: form.zipCode.value,
+          birthday: form.birthday.value,
+          country: form.country.value,
+          gender: getGender(form.gender.checked),
+          avatar: getAvatar(form),
+        });
+      }
       this.setState({ isDirty: false, success: true });
       this.onReset();
     } else {
@@ -135,9 +136,10 @@ export class Form extends React.Component<FormProps, IState> {
       <form
         className={cn(styles.form, this.props.className)}
         onSubmit={(e) => this.handleSubmit(e)}
+        data-testid="form"
       >
         <Htag className={styles.title} tag="h2">
-          Main form
+          {this.props.title}
         </Htag>
         <Input
           type="text"

@@ -38,6 +38,7 @@
 .agree h3 {
 	user-select: none;
 	cursor: pointer;
+	text-transform: none;
 }
 .none{
 	display: none;

@@ -3,8 +3,8 @@ import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export interface FormProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLFormElement>, HTMLFormElement> {
-  cardList: IFormCard[] | [];
-  addCard: (prevState: IFormCard[] | [], card: IFormCard) => void;
+  cardList?: IFormCard[] | [];
+  addCard?: (card: IFormCard) => void;
 }
 
 export interface FormFields {
