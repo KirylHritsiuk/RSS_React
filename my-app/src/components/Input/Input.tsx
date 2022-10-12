@@ -23,7 +23,11 @@ export class Input extends React.Component<InputProps> {
             onChange={onChange}
           />
         </label>
-        {!error && isDirty && <span className={styles.errorMessage}>{errorMessage}</span>}
+        {!error && isDirty && (
+          <span className={styles.errorMessage} data-testid="errorMessage">
+            {errorMessage}
+          </span>
+        )}
       </div>
     );
   }

@@ -138,9 +138,11 @@ export class Form extends React.Component<FormProps, IState> {
         onSubmit={(e) => this.handleSubmit(e)}
         data-testid="form"
       >
-        <Htag className={styles.title} tag="h2">
-          {this.props.title}
-        </Htag>
+        {this.props.title && (
+          <Htag className={styles.title} tag="h2">
+            {this.props.title}
+          </Htag>
+        )}
         <Input
           type="text"
           name="name"
@@ -150,6 +152,7 @@ export class Form extends React.Component<FormProps, IState> {
           errorMessage={'Please, input correct name'}
           reference={this.nameInput}
           onChange={this.onChangeHandler}
+          data-testid="name"
         />
         <Input
           type="text"
@@ -160,6 +163,7 @@ export class Form extends React.Component<FormProps, IState> {
           errorMessage={'Please, input correct surname'}
           reference={this.surnameInput}
           onChange={this.onChangeHandler}
+          data-testid="surname"
         />
         <Input
           type="number"
@@ -170,6 +174,7 @@ export class Form extends React.Component<FormProps, IState> {
           errorMessage={'Please, input correct zip-code'}
           reference={this.zipCodeInput}
           onChange={this.onChangeHandler}
+          data-testid="zipCode"
         />
         <Input
           type="date"
@@ -184,6 +189,7 @@ export class Form extends React.Component<FormProps, IState> {
           errorMessage={'Sorry, you is so young'}
           reference={this.birthdayInput}
           onChange={this.onChangeHandler}
+          data-testid="birthday"
         />
         <Select
           name="country"
@@ -195,8 +201,9 @@ export class Form extends React.Component<FormProps, IState> {
           reference={this.countrySelect}
           onChange={this.onChangeHandler}
           options={[' Choose country', 'Belarus', 'Ukraine', 'Russia']}
+          data-testid="country"
         />
-        <Switcher tabIndex={0} name="gender" reference={this.genderInput} />
+        <Switcher tabIndex={0} name="gender" reference={this.genderInput} data-testid="gender" />
         <Input
           type="file"
           name="file"
@@ -204,6 +211,7 @@ export class Form extends React.Component<FormProps, IState> {
           reference={this.fileInput}
           onChange={this.onChangeHandler}
           className={styles.file}
+          data-testid="file"
         />
         <Input
           type="checkbox"
@@ -215,6 +223,7 @@ export class Form extends React.Component<FormProps, IState> {
           errorMessage={'Please, check agree'}
           onChange={(e) => this.setState({ agree: e.target.checked })}
           reference={this.agreeInput}
+          data-testid="agree"
         />
         <Button type="submit" appearance="primary" disabled={this.state.isDirty}>
           SUBMIT
