@@ -34,13 +34,13 @@ export class Select extends React.Component<SelectProps> {
           {options.map((item, index) => {
             if (index === this.props.defaultValue && valueDisabled) {
               return (
-                <option key={item} value={index} selected disabled>
+                <option key={item} value={index} disabled>
                   {item}
                 </option>
               );
             } else if (index === this.props.defaultValue) {
               return (
-                <option key={item} value={index} selected>
+                <option key={item} value={index}>
                   {item}
                 </option>
               );
