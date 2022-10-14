@@ -28,6 +28,7 @@ export class Form extends React.Component<FormProps, IState> {
   countrySelect: React.RefObject<HTMLSelectElement>;
   fileInput: React.RefObject<HTMLInputElement>;
   state: IState;
+  myForm: React.RefObject<HTMLFormElement>;
 
   constructor(props: FormProps) {
     super(props);
@@ -39,6 +40,7 @@ export class Form extends React.Component<FormProps, IState> {
     this.genderInput = createRef();
     this.fileInput = createRef();
     this.agreeInput = createRef();
+    this.myForm = createRef();
     this.state = {
       isDirty: false,
       name: false,
@@ -101,21 +103,10 @@ export class Form extends React.Component<FormProps, IState> {
   }
 
   onReset() {
-    const name: HTMLInputElement | null = this.nameInput.current;
-    const surname: HTMLInputElement | null = this.surnameInput.current;
-    const zipCode: HTMLInputElement | null = this.zipCodeInput.current;
-    const birthday: HTMLInputElement | null = this.birthdayInput.current;
-    const country: HTMLSelectElement | null = this.countrySelect.current;
-    const file: HTMLInputElement | null = this.fileInput.current;
-    const agree: HTMLInputElement | null = this.agreeInput.current;
-    if (name && surname && zipCode && birthday && country && file && agree) {
-      name.value = '';
-      surname.value = '';
-      zipCode.value = '';
-      birthday.value = '';
-      country.value = '0';
-      file.value = '';
-      agree.checked = false;
+    const form: HTMLFormElement | null = this.myForm.current;
+
+    if (form) {
+      form.reset();
     }
 
     this.setState({
@@ -127,6 +118,7 @@ export class Form extends React.Component<FormProps, IState> {
       country: false,
       agree: false,
     });
+
     setTimeout(() => {
       this.setState({ success: false });
     }, 1500);
@@ -135,6 +127,7 @@ export class Form extends React.Component<FormProps, IState> {
   render() {
     return (
       <form
+        ref={this.myForm}
         className={cn(styles.form, this.props.className)}
         onSubmit={(e) => this.handleSubmit(e)}
         data-testid="form"
