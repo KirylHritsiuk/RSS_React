@@ -3,6 +3,7 @@ import { FormCard } from './FormCard';
 import { IFormCard } from './FormCard.interface';
 
 export const FormCardTestData: IFormCard = {
+  id: 1,
   name: 'Kiryl',
   surname: 'Hritsiuk',
   zipCode: '5555686',

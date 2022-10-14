@@ -1,4 +1,5 @@
 export interface IFormCard {
+  id: number;
   name: string;
   surname: string;
   zipCode: string;

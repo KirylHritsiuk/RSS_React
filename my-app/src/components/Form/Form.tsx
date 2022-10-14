@@ -83,6 +83,7 @@ export class Form extends React.Component<FormProps, IState> {
     if (isAllFieldsValid(this.state)) {
       if (this.props.addCard) {
         this.props.addCard({
+          id: Date.now(),
           name: form.name.value,
           surname: form.surname.value,
           zipCode: form.zipCode.value,

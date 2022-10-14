@@ -8,11 +8,11 @@ export class CardList extends React.Component<CardListProps> {
       <>
         {this.props.catalog ? (
           <div className={styles.cardList}>
-            {this.props.catalog.map((data, index) => {
+            {this.props.catalog.map((data) => {
               if ('brand' in data) {
                 return <Card key={data.id} data={data} />;
               } else {
-                return <FormCard key={data.name + index + data.surname} data={data} />;
+                return <FormCard key={data.id} data={data} />;
               }
             })}
           </div>

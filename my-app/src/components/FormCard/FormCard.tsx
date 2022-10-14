@@ -25,7 +25,7 @@ export class FormCard extends React.Component<FromCardProps> {
           )}
         </div>
         <Htag tag="h2" className={styles.title}>
-          {data.name + ' ' + data.surname}
+          {data.name} {data.surname}
         </Htag>
         <div>{data.birthday}</div>
         <div>{data.gender}</div>
