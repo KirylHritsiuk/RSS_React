@@ -51,7 +51,6 @@ describe('Filter component', () => {
     fireEvent.input(birthday, { target: { value: '2000-02-02' } });
     fireEvent.change(country, { target: { value: 'Belarus' } });
     fireEvent.click(button);
-    screen.debug();
     expect(screen.getAllByTestId('errorMessage').length).toBe(2);
     expect(button).toBeDisabled;
   });

@@ -15,7 +15,7 @@ describe('CardList component', () => {
   });
 
   test('FormCardList length', () => {
-    render(<CardList catalog={[FormCardTestData, FormCardTestData]} />);
+    render(<CardList catalog={FormCardTestData} />);
     expect(screen.getAllByTestId('FormCard').length).toBe(2);
   });
 

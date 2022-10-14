@@ -13,6 +13,16 @@ export const FormCardTestData: IFormCard[] = [
     gender: 'male',
     avatar: null,
   },
+  {
+    id: 2,
+    name: 'Kiryl',
+    surname: 'Hritsiuk',
+    zipCode: '5555555',
+    birthday: '2000-10-10',
+    country: 'Belarus',
+    gender: 'female',
+    avatar: null,
+  },
 ];
 
 describe('Card test', () => {
