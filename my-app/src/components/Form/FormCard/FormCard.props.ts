@@ -1,4 +1,4 @@
-import { IFormCard } from 'components/FormCard/FormCard.interface';
+import { IFormCard } from 'components/Form/FormCard/FormCard.interface';
 import { HTMLAttributes, DetailedHTMLProps } from 'react';
 
 export interface FromCardProps

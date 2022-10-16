@@ -3,7 +3,7 @@ import { FromCardProps } from './FormCard.props';
 import { Htag } from 'components';
 import styles from './FormCard.module.css';
 import cn from 'classnames';
-import { IFormCard } from 'components/FormCard/FormCard.interface';
+import { IFormCard } from 'components/Form/FormCard/FormCard.interface';
 
 export class FormCard extends React.Component<FromCardProps> {
   data: IFormCard;

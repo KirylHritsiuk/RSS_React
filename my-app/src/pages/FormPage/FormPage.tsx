@@ -1,6 +1,6 @@
 import React from 'react';
-import { CardList, Form } from '../../components';
-import { IFormCard } from '../../components/FormCard/FormCard.interface';
+import { Form, FormList } from '../../components';
+import { IFormCard } from '../../components/Form/FormCard/FormCard.interface';
 import { FormPageProps } from './FormPage.props';
 import { FormPageState } from './FormPage.state';
 
@@ -21,7 +21,7 @@ class FormPage extends React.Component<FormPageProps, FormPageState> {
     return (
       <div data-testid="form-page">
         <Form addCard={this.addCard} title="user form" />
-        {cardList.length !== 0 && <CardList catalog={cardList} />}
+        {cardList.length !== 0 && <FormList data={cardList} />}
       </div>
     );
   }

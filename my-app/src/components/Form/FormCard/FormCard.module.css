@@ -11,7 +11,7 @@
 	height: 360px;
 	gap: 10px;
 
-	background: white;
+	background: var(--white);
 }
 
 .card:hover {
