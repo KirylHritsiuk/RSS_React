@@ -1,47 +1,60 @@
 import React from 'react';
 import { CardProps } from './Card.props';
-import { Htag } from 'components';
-import { ICatalog } from 'dataBase/catalog.interface';
+import { Htag, Modal } from 'components';
 import { Button } from 'components';
 import styles from './Card.module.css';
 import cn from 'classnames';
+import { CardState } from './Card.state';
 
-export class Card extends React.Component<CardProps> {
-  data: ICatalog;
-
+export class Card extends React.Component<CardProps, CardState> {
   constructor(props: CardProps) {
     super(props);
-    this.data = this.props?.data;
+    this.state = {
+      modal: false,
+    };
   }
-
-  getTitle() {
-    return `${this.data.brand} ${this.data.name}`;
-  }
-
-  getDescription() {
-    return `${this.data.size}″ ${this.data.aspectRatio} ${this.data.resolution} ${this.data.refRate}Hz`;
-  }
-
-  getPrice() {
-    return `${this.data.price} BYN`;
-  }
+  setModal = (data: boolean) => {
+    this.setState({ modal: data });
+  };
 
   render(): React.ReactNode {
     const data = this.props.data;
     return (
-      <div className={cn(styles.card, this.props.className)} data-testid="card">
-        <div className={styles.image}>
-          <img src={data.image} alt={this.data.name} />
+      <>
+        <div className={cn(styles.card, this.props.className)} data-testid="card">
+          <div className={styles.image}>
+            <img src={data.image} alt={data.name} />
+          </div>
+          <Htag tag="h2" className={styles.title}>
+            {data.name}
+          </Htag>
+          <div className={styles.buttonWrapper}>
+            <Button
+              appearance="ghost"
+              className={styles.button}
+              onClick={() => this.setState({ modal: true })}
+            >
+              Show more
+            </Button>
+          </div>
         </div>
-        <Htag tag="h2" className={styles.title}>
-          {this.getTitle()}
-        </Htag>
-        <div>{this.getDescription()}</div>
-        <Htag tag="h3">{this.getPrice()}</Htag>
-        <Button appearance="ghost" className={styles.button}>
-          BUY
-        </Button>
-      </div>
+        <Modal className={styles.modal} visible={this.state.modal} setModal={this.setModal}>
+          {
+            <div className={styles.modalContent}>
+              <img src={data.image} alt={data.name} />
+              <div>
+                <Htag tag="h2">{data.name}</Htag>
+                <p>Status: {data.status}</p>
+                <p>Species: {data.species}</p>
+                <p>Gender: {data.gender}</p>
+                <p>Type: {data.type}</p>
+                <p>Origin: {data.origin.name}</p>
+                <p>Location: {data.location.name}</p>
+              </div>
+            </div>
+          }
+        </Modal>
+      </>
     );
   }
 }

@@ -12,7 +12,7 @@
     border-radius: 5px;
 }
 
-.page:hover:not(.current) {
+.page:hover:not(.current, .disabled) {
     border-color: var(--primary-hover);
 }
 
@@ -20,4 +20,9 @@
     border: 2px solid var(--red);
     color: var(--red);
     font-weight: bold;
+}
+
+.disabled {
+    border-color: var(--gray);
+    color: var(--gray);
 }

@@ -1,7 +1,7 @@
-import { ICatalog } from 'dataBase/catalog.interface';
+import { Character } from 'interfaces/character.interface';
 import { HTMLAttributes, DetailedHTMLProps } from 'react';
 
 export interface CardProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  data: ICatalog;
+  data: Character;
 }

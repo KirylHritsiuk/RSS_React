@@ -4,5 +4,7 @@ export interface PaginationProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   totalPages: number;
   page: number;
-  changePage: (page: number) => void;
+  changePage: (url: string, page: number) => void;
+  prev: string | null;
+  next: string | null;
 }
