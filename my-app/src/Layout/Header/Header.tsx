@@ -7,7 +7,7 @@ export class Header extends React.Component<HeaderProps> {
   render(): React.ReactNode {
     return (
       <header className={styles.header}>
-        <Htag tag="h1">Task#2: React.Forms</Htag>
+        <Htag tag="h1">Task#3: React.API</Htag>
         <Nav />
       </header>
     );

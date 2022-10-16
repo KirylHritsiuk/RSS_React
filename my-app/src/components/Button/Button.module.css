@@ -10,7 +10,6 @@
 	border: none;
 	border-radius: 20px;
 
-	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.5);
 	font-size: 14px;
 	font-weight: 600;
 	letter-spacing: 0.06rem;
@@ -27,13 +26,14 @@
 
 .ghost {
 	color: var(--black);
-	border: 1px solid var(--gray-light);
+	border: 1px solid var(--gray);
 	background: none;
 }
 
 .ghost:hover {
 	color: var(--white);
 	background-color: var(--primary);
+	border-color: var(--primary);
 }
 
 .button:disabled,
