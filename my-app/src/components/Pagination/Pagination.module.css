@@ -1,0 +1,23 @@
+.pagination {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-self: center;
+}
+
+.page {
+    padding: 5px;
+    border: 1px solid var(--primary);
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.page:hover:not(.current) {
+    border-color: var(--primary-hover);
+}
+
+.current {
+    border: 2px solid var(--red);
+    color: var(--red);
+    font-weight: bold;
+}
