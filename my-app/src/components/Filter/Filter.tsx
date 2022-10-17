@@ -8,10 +8,17 @@ export class Filter extends React.Component<FilterProps> {
     return (
       <div className={cn(styles.filter, this.props.className)}>
         {this.props.names.map((name) => (
-          <div className={styles.item} key={name}>
-            <input type="checkbox" name={name} id={name} data-testid={name} />
-            <label htmlFor={name}>{name}</label>
-          </div>
+          <label className={styles.item} htmlFor={name} key={name}>
+            <input
+              type="radio"
+              defaultChecked={name === this.props.checked ? true : false}
+              name="filter"
+              value={name}
+              id={name}
+              data-testid={name}
+            />
+            {name}
+          </label>
         ))}
       </div>
     );

@@ -86,12 +86,16 @@
 
 .modal h2 {
 	margin-top: 0;
+	line-height: 22px;
+	font-size: 30px;
 }
+
 .modalContent {
 	display: flex;
 	flex-direction: row;
 	gap: 10px;
 }
+
 .modalContent img {
 	width: 150px;
 	height: 150px;

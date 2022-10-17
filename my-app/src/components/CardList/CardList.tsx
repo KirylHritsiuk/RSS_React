@@ -1,19 +1,21 @@
-import { Card, Loader, Pagination } from 'components';
+import { Card, Htag, Loader, Pagination } from 'components';
 import React from 'react';
 import { CardListProps } from './CardList.props';
 import styles from './CardList.module.css';
 import { CardListState } from './CardList.state';
 import { API } from 'interfaces/API';
+import { Character } from 'interfaces/character.interface';
+import { getResponseData } from './helpers/getResponseData';
+import { APIError } from 'interfaces/error.interface';
 export class CardList extends React.Component<CardListProps, CardListState> {
   constructor(props: CardListProps) {
     super(props);
     this.state = {
       character: [],
       loading: true,
-      error: '',
+      error: null,
       page: 1,
       totalPages: 0,
-      url: 'https://rickandmortyapi.com/api/character',
       prev: null,
       next: null,
     };
@@ -24,57 +26,55 @@ export class CardList extends React.Component<CardListProps, CardListState> {
     this.fetching(url);
   };
 
-  // getPage = () => {
-  //   const { prev } = this.state;
-  //   if (prev) {
-  //     const page = prev.match(/\d+$/g);
-  //     if (page) {
-  //       this.setState({ page: parseInt(page[0]) + 1 });
-  //       console.log('page', page);
-  //     }
-  //   }
-  // };
-
-  fetching = async (url: string = this.state.url) => {
+  fetching = async (url: string = this.props.url + this.props.query) => {
     try {
       const response = await fetch(url);
-      const data: API = await response.json();
-      this.setState({
-        character: data.results,
-        totalPages: data.info.pages,
-        prev: data.info.prev,
-        next: data.info.next,
-      });
-      // this.getPage();
-      console.log(data.results);
+      const data: API | Character[] | Character | APIError = await response.json();
+      this.setState((prevState) => ({ ...prevState, ...getResponseData(data) }));
     } catch (error) {
-      console.log(error);
+      const myError = error as Error;
+      console.log('fetching', myError.message);
+      this.setState({ error: myError.message });
     } finally {
       this.setState({ loading: false });
     }
   };
 
   async componentDidMount(): Promise<void> {
-    this.fetching(this.state.url);
+    await this.fetching();
+  }
+
+  async componentDidUpdate(prevProps: Readonly<CardListProps>): Promise<void> {
+    if (this.props.query !== prevProps.query) {
+      await this.fetching();
+    }
   }
 
   render(): React.ReactNode {
+    const { error, totalPages, character } = this.state;
     return (
       <>
+        {error && (
+          <Htag className={styles.error} tag="h2">
+            {error}
+          </Htag>
+        )}
         <div className={styles.cardList}>
           {this.state.loading ? (
             <Loader />
           ) : (
-            this.state.character.map((data) => <Card data={data} key={data.id} />)
+            character.map((data) => <Card data={data} key={data.id} />)
           )}
         </div>
-        <Pagination
-          totalPages={this.state.totalPages}
-          page={this.state.page}
-          changePage={this.changePage}
-          prev={this.state.prev}
-          next={this.state.next}
-        />
+        {!!totalPages && (
+          <Pagination
+            totalPages={this.state.totalPages}
+            page={this.state.page}
+            changePage={this.changePage}
+            prev={this.state.prev}
+            next={this.state.next}
+          />
+        )}
       </>
     );
   }

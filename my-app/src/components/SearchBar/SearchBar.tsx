@@ -1,8 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { SearchBarProps } from './SearchBar.props';
 import { ReactComponent as SearchIcon } from './search.svg';
-import { Button } from 'components';
-import { Filter } from 'components';
+import { Button, Filter } from 'components';
 import styles from './SearchBar.module.css';
 
 export class SearchBar extends React.Component<SearchBarProps> {
@@ -12,7 +11,8 @@ export class SearchBar extends React.Component<SearchBarProps> {
 
   componentDidMount(): void {
     const inputValue = this.state.inputValue;
-    this.setState({ inputValue });
+    this.setState((prevState) => ({ ...prevState, inputValue }));
+    this.props.updateQuery(inputValue);
   }
 
   componentWillUnmount(): void {
@@ -20,11 +20,20 @@ export class SearchBar extends React.Component<SearchBarProps> {
   }
 
   onInputChange(e: ChangeEvent<HTMLInputElement>) {
-    this.setState({ inputValue: e.target.value });
+    this.setState((prevState) => ({ ...prevState, inputValue: e.target.value }));
+    localStorage.setItem('search', e.target.value);
   }
+
+  search = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      this.props.updateQuery(this.state.inputValue);
+      e.currentTarget.blur();
+    }
+  };
 
   render(): React.ReactNode {
     const { inputValue } = this.state;
+    const { updateQuery } = this.props;
     return (
       <div className={styles.searchBar}>
         <div className={styles.search}>
@@ -35,12 +44,21 @@ export class SearchBar extends React.Component<SearchBarProps> {
             className={styles.searchInput}
             onChange={(e) => this.onInputChange(e)}
             value={inputValue}
+            onKeyDown={(e) => this.search(e)}
           />
-          <Button appearance="primary" className={styles.searchButton}>
+          <Button
+            appearance="primary"
+            className={styles.searchButton}
+            onClick={() => updateQuery(inputValue)}
+          >
             Search
           </Button>
         </div>
-        <Filter className={styles.filter} names={['gaming', 'professional']} />
+        <Filter
+          className={styles.filter}
+          names={['characters', 'locations', 'episodes']}
+          checked={'characters'}
+        />
       </div>
     );
   }

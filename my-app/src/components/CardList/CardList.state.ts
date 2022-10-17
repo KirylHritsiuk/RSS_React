@@ -3,10 +3,9 @@ import { Character } from 'interfaces/character.interface';
 export interface CardListState {
   character: Character[] | [];
   loading: boolean;
-  error: string;
+  error: string | null;
   page: number;
   totalPages: number;
-  url: string;
   prev: string | null;
   next: string | null;
 }
