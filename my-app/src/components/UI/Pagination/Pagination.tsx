@@ -2,6 +2,7 @@ import React from 'react';
 import { PaginationProps } from './Pagination.props';
 import styles from './Pagination.module.css';
 import cn from 'classnames';
+import { getPage } from './helpers/getPage';
 
 export class Pagination extends React.Component<PaginationProps> {
   render() {
@@ -15,7 +16,7 @@ export class Pagination extends React.Component<PaginationProps> {
         ) : (
           <span className={cn(styles.page, styles.disabled)}>prev</span>
         )}
-        <span className={styles.page}>{page}</span>
+        <span className={styles.page}>{getPage(prev)}</span>
         {next !== null ? (
           <span className={styles.page} onClick={() => changePage(next, page + 1)}>
             next
