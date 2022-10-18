@@ -7,7 +7,7 @@ export class Filter extends React.Component<FilterProps> {
   render() {
     const { className, names, checked, updateFilter, ...props } = this.props;
     return (
-      <div className={cn(styles.filter, className)} {...props}>
+      <div className={cn(styles.filter, className)} {...props} data-testid="filter">
         {names &&
           names.map((name) => (
             <label className={styles.item} htmlFor={name} key={name}>

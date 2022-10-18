@@ -12,7 +12,7 @@ describe('FormPage', () => {
       </MemoryRouter>
     );
     expect(screen.getByTestId('form')).toBeInTheDocument();
-    expect(screen.queryByTestId('FormCard')).not.toBeInTheDocument();
+    expect(screen.queryByTestId('formCard')).not.toBeInTheDocument();
   });
   // test('add card', () => {
   //   render(

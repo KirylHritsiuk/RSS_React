@@ -57,11 +57,11 @@ export class CardList extends React.Component<CardListProps, CardListState> {
     return (
       <>
         {error && (
-          <Htag className={styles.error} tag="h2">
+          <Htag className={styles.error} tag="h2" data-testid={'error'}>
             {error}
           </Htag>
         )}
-        <div className={styles.cardList}>
+        <div className={styles.cardList} data-testid="cardList">
           {this.state.loading ? (
             <Loader />
           ) : (
