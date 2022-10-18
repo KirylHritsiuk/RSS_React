@@ -28,7 +28,7 @@ export const FormCardTestData: IFormCard[] = [
 describe('Card test', () => {
   test('render card', () => {
     render(<FormCard data={FormCardTestData[0]} />);
-    expect(screen.getByTestId('FormCard')).toBeInTheDocument();
+    expect(screen.getByTestId('formCard')).toBeInTheDocument();
   });
   test('card img', () => {
     render(<FormCard data={FormCardTestData[0]} />);
