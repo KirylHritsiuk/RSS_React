@@ -1,4 +1,6 @@
 import { Character } from './character.interface';
+import { Location } from './location.interface';
+import { Episode } from './episode.interface';
 
 export interface Info {
   count: number;
@@ -11,5 +13,5 @@ export type category = 'characters' | 'locations' | 'episodes';
 
 export interface API {
   info: Info;
-  results: Character[];
+  results: (Character | Location | Episode)[];
 }

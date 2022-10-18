@@ -5,21 +5,24 @@ import cn from 'classnames';
 
 export class Filter extends React.Component<FilterProps> {
   render() {
+    const { className, names, checked, updateFilter, ...props } = this.props;
     return (
-      <div className={cn(styles.filter, this.props.className)}>
-        {this.props.names.map((name) => (
-          <label className={styles.item} htmlFor={name} key={name}>
-            <input
-              type="radio"
-              defaultChecked={name === this.props.checked ? true : false}
-              name="filter"
-              value={name}
-              id={name}
-              data-testid={name}
-            />
-            {name}
-          </label>
-        ))}
+      <div className={cn(styles.filter, className)} {...props}>
+        {names &&
+          names.map((name) => (
+            <label className={styles.item} htmlFor={name} key={name}>
+              <input
+                type="radio"
+                defaultChecked={name === checked ? true : false}
+                name="filter"
+                value={name}
+                id={name}
+                data-testid={name}
+                onChange={(e) => updateFilter(e.target.value)}
+              />
+              {name}
+            </label>
+          ))}
       </div>
     );
   }

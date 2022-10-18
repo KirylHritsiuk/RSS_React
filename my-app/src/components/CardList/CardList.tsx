@@ -1,4 +1,4 @@
-import { Card, Htag, Loader, Pagination } from 'components';
+import { CardCharacter, CardLocation, CardEpisode, Htag, Loader, Pagination } from 'components';
 import React from 'react';
 import { CardListProps } from './CardList.props';
 import styles from './CardList.module.css';
@@ -7,6 +7,8 @@ import { API } from 'interfaces/API';
 import { Character } from 'interfaces/character.interface';
 import { getResponseData } from './helpers/getResponseData';
 import { APIError } from 'interfaces/error.interface';
+import { isCharacter } from './helpers/isCharacter';
+import { isLocation } from './helpers/isLocation';
 export class CardList extends React.Component<CardListProps, CardListState> {
   constructor(props: CardListProps) {
     super(props);
@@ -26,7 +28,7 @@ export class CardList extends React.Component<CardListProps, CardListState> {
     this.fetching(url);
   };
 
-  fetching = async (url: string = this.props.url + this.props.query) => {
+  fetching = async (url: string = this.props.url) => {
     try {
       const response = await fetch(url);
       const data: API | Character[] | Character | APIError = await response.json();
@@ -45,7 +47,7 @@ export class CardList extends React.Component<CardListProps, CardListState> {
   }
 
   async componentDidUpdate(prevProps: Readonly<CardListProps>): Promise<void> {
-    if (this.props.query !== prevProps.query) {
+    if (this.props.url !== prevProps.url) {
       await this.fetching();
     }
   }
@@ -63,7 +65,15 @@ export class CardList extends React.Component<CardListProps, CardListState> {
           {this.state.loading ? (
             <Loader />
           ) : (
-            character.map((data) => <Card data={data} key={data.id} />)
+            character.map((data) => {
+              if (isCharacter(data)) {
+                return <CardCharacter data={data} key={data.id} />;
+              } else if (isLocation(data)) {
+                return <CardLocation data={data} key={data.id} />;
+              } else {
+                return <CardEpisode data={data} key={data.id} />;
+              }
+            })
           )}
         </div>
         {!!totalPages && (

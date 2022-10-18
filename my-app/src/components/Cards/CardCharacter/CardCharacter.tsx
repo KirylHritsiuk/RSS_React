@@ -6,7 +6,7 @@ import styles from './Card.module.css';
 import cn from 'classnames';
 import { CardState } from './Card.state';
 
-export class Card extends React.Component<CardProps, CardState> {
+export class CardCharacter extends React.Component<CardProps, CardState> {
   constructor(props: CardProps) {
     super(props);
     this.state = {
@@ -14,14 +14,14 @@ export class Card extends React.Component<CardProps, CardState> {
     };
   }
   setModal = (data: boolean) => {
-    this.setState({ modal: data });
+    this.setState((prevState) => ({ ...prevState, modal: data }));
   };
 
   render(): React.ReactNode {
     const data = this.props.data;
     return (
       <>
-        <div className={cn(styles.card, this.props.className)} data-testid="card">
+        <div className={cn(styles.card, this.props.className)} data-testid="cardCharacter">
           <div className={styles.image}>
             <img src={data.image} alt={data.name} />
           </div>

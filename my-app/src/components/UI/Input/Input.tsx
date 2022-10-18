@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Input.module.css';
 import cn from 'classnames';
 import { InputProps } from './Input.props';
-import { Htag } from 'components/Htag/Htag';
+import { Htag } from 'components/UI/Htag/Htag';
 
 export class Input extends React.Component<InputProps> {
   render() {

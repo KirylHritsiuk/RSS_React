@@ -7,12 +7,13 @@ import styles from './SearchBar.module.css';
 export class SearchBar extends React.Component<SearchBarProps> {
   state = {
     inputValue: localStorage.getItem('search') || '',
+    filter: '',
   };
 
   componentDidMount(): void {
     const inputValue = this.state.inputValue;
     this.setState((prevState) => ({ ...prevState, inputValue }));
-    this.props.updateQuery(inputValue);
+    this.props.updateQuery(this.state.inputValue);
   }
 
   componentWillUnmount(): void {
@@ -33,7 +34,7 @@ export class SearchBar extends React.Component<SearchBarProps> {
 
   render(): React.ReactNode {
     const { inputValue } = this.state;
-    const { updateQuery } = this.props;
+    const { updateQuery, updateFilter, filter, checked } = this.props;
     return (
       <div className={styles.searchBar}>
         <div className={styles.search}>
@@ -56,8 +57,9 @@ export class SearchBar extends React.Component<SearchBarProps> {
         </div>
         <Filter
           className={styles.filter}
-          names={['characters', 'locations', 'episodes']}
-          checked={'characters'}
+          names={filter}
+          checked={checked}
+          updateFilter={updateFilter}
         />
       </div>
     );

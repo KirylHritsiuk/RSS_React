@@ -1,7 +1,9 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
+import React, { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export interface FilterProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  names: string[];
+  names?: string[];
   checked?: string;
+  // onFilterChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  updateFilter: (data: string) => void;
 }

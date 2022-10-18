@@ -1,8 +1,7 @@
+import { Location } from 'interfaces/location.interface';
 import { HTMLAttributes, DetailedHTMLProps } from 'react';
-import { Character } from 'interfaces/character.interface';
 
-export interface CardListProps
+export interface CardProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  data?: Character[];
-  url: string;
+  data: Location;
 }
