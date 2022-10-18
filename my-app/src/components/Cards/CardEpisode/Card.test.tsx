@@ -1,41 +1,36 @@
-export {};
-// import { render, screen } from '@testing-library/react';
-// import { Card } from './Card';
-// import { ICatalog } from 'dataBase/catalog.interface';
+import { render, screen } from '@testing-library/react';
+import { Episode } from 'interfaces/episode.interface';
+import { CardEpisode } from './CardEpisode';
 
-// const data: ICatalog = {
-//   id: 'el1',
-//   brand: 'apple',
-//   name: 'Pro',
-//   image: './img/content/apple/apple.jpeg',
-//   price: '14530.00',
-//   year: '2019',
-//   size: '32',
-//   resolution: '6016x3384',
-//   aspectRatio: '16:9',
-//   refRate: '60',
-//   count: '1',
-//   portrait: 'false',
-//   gaming: 'false',
-//   pro: 'true',
-//   favorite: 'false',
-// };
+const data: Episode = {
+  id: 1,
+  name: 'Pilot',
+  air_date: 'December 2, 2013',
+  episode: 'S01E01',
+  characters: [],
+  url: '',
+  created: '',
+};
 
-// describe('Card test', () => {
-//   test('render card', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByTestId('card')).toBeInTheDocument();
-//   });
-//   test('card img', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByAltText(data.name)).toBeInTheDocument();
-//   });
-//   test('card price', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByText(/ BYN/)).toBeInTheDocument();
-//   });
-//   test('card button', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByRole('button')).toBeInTheDocument();
-//   });
-// });
+describe('Card test', () => {
+  test('render card', () => {
+    render(<CardEpisode data={data} />);
+    expect(screen.getByTestId('cardEpisode')).toBeInTheDocument();
+  });
+
+  test('card title', () => {
+    render(<CardEpisode data={data} />);
+    expect(screen.getAllByText(/Pilot/i).length).toBe(1);
+  });
+
+  test('card info', () => {
+    render(<CardEpisode data={data} />);
+    expect(screen.getByText(/December 2, 2013/i)).toBeInTheDocument();
+    expect(screen.getByText(/S01E01/i)).toBeInTheDocument();
+  });
+
+  test('card button', () => {
+    render(<CardEpisode data={data} />);
+    expect(screen.queryByTestId('button')).not.toBeInTheDocument();
+  });
+});

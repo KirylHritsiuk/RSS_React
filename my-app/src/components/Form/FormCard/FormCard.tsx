@@ -16,7 +16,7 @@ export class FormCard extends React.Component<FromCardProps> {
   render(): React.ReactNode {
     const data = this.props.data;
     return (
-      <div className={cn(styles.card, this.props.className)} data-testid="FormCard">
+      <div className={cn(styles.card, this.props.className)} data-testid="formCard">
         <div className={styles.image}>
           {data.avatar ? (
             <img src={data.avatar} alt={this.data.name} />

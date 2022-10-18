@@ -1,41 +1,36 @@
-export {};
-// import { render, screen } from '@testing-library/react';
-// import { Card } from './Card';
-// import { ICatalog } from 'dataBase/catalog.interface';
+import { render, screen } from '@testing-library/react';
+import { Location } from 'interfaces/location.interface';
+import { CardLocation } from './CardLocation';
 
-// const data: ICatalog = {
-//   id: 'el1',
-//   brand: 'apple',
-//   name: 'Pro',
-//   image: './img/content/apple/apple.jpeg',
-//   price: '14530.00',
-//   year: '2019',
-//   size: '32',
-//   resolution: '6016x3384',
-//   aspectRatio: '16:9',
-//   refRate: '60',
-//   count: '1',
-//   portrait: 'false',
-//   gaming: 'false',
-//   pro: 'true',
-//   favorite: 'false',
-// };
+const data: Location = {
+  id: 0,
+  name: 'Earth',
+  type: 'Planet',
+  dimension: 'Dimension C-137',
+  residents: [],
+  url: '',
+  created: '',
+};
 
-// describe('Card test', () => {
-//   test('render card', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByTestId('card')).toBeInTheDocument();
-//   });
-//   test('card img', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByAltText(data.name)).toBeInTheDocument();
-//   });
-//   test('card price', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByText(/ BYN/)).toBeInTheDocument();
-//   });
-//   test('card button', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByRole('button')).toBeInTheDocument();
-//   });
-// });
+describe('Card test', () => {
+  test('render card', () => {
+    render(<CardLocation data={data} />);
+    expect(screen.getByTestId('cardLocation')).toBeInTheDocument();
+  });
+
+  test('card title', () => {
+    render(<CardLocation data={data} />);
+    expect(screen.getAllByText(/Earth/i).length).toBe(1);
+  });
+
+  test('card info', () => {
+    render(<CardLocation data={data} />);
+    expect(screen.getByText(/Dimension C-137/i)).toBeInTheDocument();
+    expect(screen.getByText(/Planet/i)).toBeInTheDocument();
+  });
+
+  test('card button', () => {
+    render(<CardLocation data={data} />);
+    expect(screen.queryByTestId('button')).not.toBeInTheDocument();
+  });
+});

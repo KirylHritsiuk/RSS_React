@@ -1,27 +1,31 @@
-export {};
-// import { render, screen } from '@testing-library/react';
-// import { CardList } from './FormList';
-// import { CATALOG } from '../../dataBase/catalog';
-// import { FormCardTestData } from 'components/Form/FormCard/FormCard.test';
+import { render, screen } from '@testing-library/react';
+import { FormList } from './FormList';
+import { IFormCard } from '../FormCard/FormCard.interface';
 
-// describe('CardList component', () => {
-//   test('list render', () => {
-//     const { container } = render(<CardList catalog={CATALOG} />);
-//     expect(container).toBeInTheDocument();
-//   });
+const data: IFormCard = {
+  id: 0,
+  name: 'name',
+  surname: 'name',
+  zipCode: '11111111',
+  birthday: '2000-12-1',
+  country: 'belarus',
+  gender: 'male',
+  avatar: null,
+};
 
-//   test('CardList length', () => {
-//     render(<CardList catalog={CATALOG} />);
-//     expect(screen.getAllByTestId('card').length).toBe(CATALOG.length);
-//   });
+describe('CardList component', () => {
+  test('list render', () => {
+    const { container } = render(<FormList data={[data]} />);
+    expect(container).toBeInTheDocument();
+  });
 
-//   test('FormCardList length', () => {
-//     render(<CardList catalog={FormCardTestData} />);
-//     expect(screen.getAllByTestId('FormCard').length).toBe(2);
-//   });
+  test('FormList length', () => {
+    render(<FormList data={[data]} />);
+    expect(screen.getAllByTestId('formCard').length).toBe(1);
+  });
 
-//   test('Empty list', () => {
-//     render(<CardList />);
-//     expect(screen.queryAllByTestId('card')).toBeNull;
-//   });
-// });
+  test('Empty list', () => {
+    render(<FormList data={[]} />);
+    expect(screen.queryAllByTestId('formCard')).toBeNull;
+  });
+});

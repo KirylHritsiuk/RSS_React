@@ -30,6 +30,7 @@ export class CardCharacter extends React.Component<CardProps, CardState> {
           </Htag>
           <div className={styles.buttonWrapper}>
             <Button
+              data-testid="button"
               appearance="ghost"
               className={styles.button}
               onClick={() => this.setState({ modal: true })}
@@ -38,7 +39,12 @@ export class CardCharacter extends React.Component<CardProps, CardState> {
             </Button>
           </div>
         </div>
-        <Modal className={styles.modal} visible={this.state.modal} setModal={this.setModal}>
+        <Modal
+          className={styles.modal}
+          visible={this.state.modal}
+          setModal={this.setModal}
+          data-testid="modal"
+        >
           {
             <div className={styles.modalContent}>
               <img src={data.image} alt={data.name} />

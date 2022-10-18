@@ -1,41 +1,14 @@
-export {};
-// import { render, screen } from '@testing-library/react';
-// import { Card } from './Modal';
-// import { ICatalog } from 'dataBase/catalog.interface';
+import { render, screen } from '@testing-library/react';
+import { Loader } from './Loader';
 
-// const data: ICatalog = {
-//   id: 'el1',
-//   brand: 'apple',
-//   name: 'Pro',
-//   image: './img/content/apple/apple.jpeg',
-//   price: '14530.00',
-//   year: '2019',
-//   size: '32',
-//   resolution: '6016x3384',
-//   aspectRatio: '16:9',
-//   refRate: '60',
-//   count: '1',
-//   portrait: 'false',
-//   gaming: 'false',
-//   pro: 'true',
-//   favorite: 'false',
-// };
+describe('Loader component', () => {
+  test('render Loader', () => {
+    render(<Loader />);
+    expect(screen.getByTestId('loader')).toBeInTheDocument();
+  });
 
-// describe('Card test', () => {
-//   test('render card', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByTestId('card')).toBeInTheDocument();
-//   });
-//   test('card img', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByAltText(data.name)).toBeInTheDocument();
-//   });
-//   test('card price', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByText(/ BYN/)).toBeInTheDocument();
-//   });
-//   test('card button', () => {
-//     render(<Card data={data} />);
-//     expect(screen.getByRole('button')).toBeInTheDocument();
-//   });
-// });
+  test('Loader title', () => {
+    render(<Loader />);
+    expect(screen.getByText(/Loading...../i)).toBeInTheDocument();
+  });
+});

@@ -8,7 +8,7 @@ export class Pagination extends React.Component<PaginationProps> {
   render() {
     const { page, prev, next, changePage } = this.props;
     return (
-      <div className={styles.pagination}>
+      <div className={styles.pagination} data-testid="pagination">
         {prev !== null ? (
           <span className={styles.page} onClick={() => changePage(prev, page - 1)}>
             prev

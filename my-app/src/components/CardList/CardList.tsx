@@ -78,7 +78,6 @@ export class CardList extends React.Component<CardListProps, CardListState> {
         </div>
         {!!totalPages && (
           <Pagination
-            totalPages={this.state.totalPages}
             page={this.state.page}
             changePage={this.changePage}
             prev={this.state.prev}
