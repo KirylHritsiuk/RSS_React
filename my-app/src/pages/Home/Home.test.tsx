@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
-import Home from './Home';
+import { Home } from './Home';
 
 describe('Home Page', () => {
   test('render Home page', async () => {
