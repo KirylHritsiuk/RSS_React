@@ -7,7 +7,7 @@ class Layout extends React.Component {
   render() {
     return (
       <>
-        <Header />
+        <Header title="Task#4 React.Hooks" />
         <main>
           <Outlet />
         </main>
