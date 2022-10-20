@@ -15,7 +15,7 @@ describe('Select component', () => {
   });
 
   test('error box enable', () => {
-    render(<Select options={options} error={false} isDirty={true} errorMessage={'failed'} />);
+    render(<Select options={options} isDirty={true} errorMessage={'failed'} />);
     expect(screen.queryByText('failed')).toBeInTheDocument();
   });
 

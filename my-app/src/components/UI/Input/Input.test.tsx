@@ -13,9 +13,7 @@ describe('Input component', () => {
   });
 
   test('error box enable', () => {
-    render(
-      <Input type={'text'} placeholder="name" errorMessage="failed" error={false} isDirty={true} />
-    );
+    render(<Input type={'text'} placeholder="name" errorMessage="failed" isDirty={true} />);
     expect(screen.queryByText('failed')).toBeInTheDocument();
   });
 });

@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import { Htag } from 'components';
 import styles from './Switcher.module.css';
 import { SwitcherProps } from './Switcher.props';
 
-export class Switcher extends React.Component<SwitcherProps> {
-  render() {
-    const { name, reference, onChange, tabIndex } = this.props;
+export const Switcher = forwardRef(
+  ({ name, onChange, tabIndex, ...props }: SwitcherProps, ref: ForwardedRef<HTMLInputElement>) => {
     return (
       <div className={styles.switcher}>
         <Htag tag="h3">Male</Htag>
@@ -14,9 +13,9 @@ export class Switcher extends React.Component<SwitcherProps> {
           id={`switcher`}
           type="checkbox"
           name={name}
-          ref={reference}
+          ref={ref}
           onChange={onChange}
-          {...this.props}
+          {...props}
         />
         <label tabIndex={tabIndex} className={styles.label} htmlFor={`switcher`}>
           <span className={styles.button} />
@@ -25,4 +24,4 @@ export class Switcher extends React.Component<SwitcherProps> {
       </div>
     );
   }
-}
+);

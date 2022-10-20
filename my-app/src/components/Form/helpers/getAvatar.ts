@@ -1,8 +1,6 @@
-import { FormFields } from '../Form.props';
-
-export const getAvatar = (form: HTMLFormElement & FormFields) => {
-  if (form.file.files[0] !== undefined) {
-    return URL.createObjectURL(form.file.files[0]);
+export const getAvatar = (data: File[] | null) => {
+  if (data && data[0]) {
+    return URL.createObjectURL(data[0]);
   }
   return null;
 };

@@ -3,5 +3,5 @@ import { HTMLAttributes, DetailedHTMLProps } from 'react';
 
 export interface FormListProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  data: IFormCard[];
+  cards: IFormCard[];
 }

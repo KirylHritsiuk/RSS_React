@@ -7,4 +7,5 @@ export interface IFormCard {
   country: string;
   gender: string;
   avatar: string | null;
+  agree: boolean;
 }

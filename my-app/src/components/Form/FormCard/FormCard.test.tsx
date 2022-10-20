@@ -12,6 +12,7 @@ export const FormCardTestData: IFormCard[] = [
     country: 'Belarus',
     gender: 'male',
     avatar: null,
+    agree: true,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ export const FormCardTestData: IFormCard[] = [
     country: 'Belarus',
     gender: 'female',
     avatar: null,
+    agree: true,
   },
 ];
 

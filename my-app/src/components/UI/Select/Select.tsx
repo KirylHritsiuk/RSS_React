@@ -1,44 +1,34 @@
-import React from 'react';
+import React, { ForwardedRef, forwardRef } from 'react';
 import styles from './Select.module.css';
 import cn from 'classnames';
 import { SelectProps } from './Select.props';
 
-export class Select extends React.Component<SelectProps> {
-  render() {
-    const {
-      name,
-      className,
-      error,
-      isDirty,
-      errorMessage,
-      reference,
-      onChange,
-      options,
-      valueDisabled,
-      ...props
-    } = this.props;
+export const Select = forwardRef(
+  (
+    { name, className, error, onChange, options, valueDisabled, ...props }: SelectProps,
+    ref: ForwardedRef<HTMLSelectElement>
+  ) => {
     return (
       <div
         className={cn(styles.inputWrapper, {
-          [styles.error]: !error && isDirty,
+          [styles.error]: error,
         })}
       >
         <select
           className={cn(styles.select, className)}
           name={name}
-          defaultValue={0}
-          ref={reference}
+          ref={ref}
           onChange={onChange}
           {...props}
         >
           {options.map((item, index) => {
-            if (index === this.props.defaultValue && valueDisabled) {
+            if (index === props.defaultValue && valueDisabled) {
               return (
                 <option key={item} value={index} disabled>
                   {item}
                 </option>
               );
-            } else if (index === this.props.defaultValue) {
+            } else if (index === props.defaultValue) {
               return (
                 <option key={item} value={index}>
                   {item}
@@ -52,8 +42,8 @@ export class Select extends React.Component<SelectProps> {
             );
           })}
         </select>
-        {!error && isDirty && <span className={styles.errorMessage}>{errorMessage}</span>}
+        {error && <span className={styles.errorMessage}>{error.message}</span>}
       </div>
     );
   }
-}
+);

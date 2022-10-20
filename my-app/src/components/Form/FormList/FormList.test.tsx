@@ -11,21 +11,22 @@ const data: IFormCard = {
   country: 'belarus',
   gender: 'male',
   avatar: null,
+  agree: true,
 };
 
 describe('CardList component', () => {
   test('list render', () => {
-    const { container } = render(<FormList data={[data]} />);
+    const { container } = render(<FormList cards={[data]} />);
     expect(container).toBeInTheDocument();
   });
 
   test('FormList length', () => {
-    render(<FormList data={[data]} />);
+    render(<FormList cards={[data]} />);
     expect(screen.getAllByTestId('formCard').length).toBe(1);
   });
 
   test('Empty list', () => {
-    render(<FormList data={[]} />);
+    render(<FormList cards={[]} />);
     expect(screen.queryAllByTestId('formCard')).toBeNull;
   });
 });
