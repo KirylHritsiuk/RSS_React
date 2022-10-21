@@ -4,7 +4,6 @@ export interface InputProps
   extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> {
   error?: FieldError;
   isDirty?: boolean;
-  errorMessage?: string;
   reference?: React.RefObject<HTMLInputElement>;
   label?: string;
 }

@@ -1,5 +1,11 @@
 import { render, screen } from '@testing-library/react';
+import { FieldError } from 'react-hook-form';
 import { Input } from './Input';
+
+const error: FieldError = {
+  type: 'onChange',
+  message: 'failed',
+};
 
 describe('Input component', () => {
   test('render input', () => {
@@ -8,12 +14,12 @@ describe('Input component', () => {
   });
 
   test('error box disabled', () => {
-    render(<Input type={'text'} placeholder="name" errorMessage="failed" />);
-    expect(screen.queryByText('failed')).not.toBeInTheDocument();
+    render(<Input type={'text'} placeholder="name" />);
+    expect(screen.queryByText('failed')).toBeNull();
   });
 
   test('error box enable', () => {
-    render(<Input type={'text'} placeholder="name" errorMessage="failed" isDirty={true} />);
+    render(<Input type={'text'} placeholder="name" error={error} />);
     expect(screen.queryByText('failed')).toBeInTheDocument();
   });
 });

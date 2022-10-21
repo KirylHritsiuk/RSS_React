@@ -1,8 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { FieldError } from 'react-hook-form';
 import { Select } from './Select';
 
 const options = ['one', 'class', 'two'];
+const error: FieldError = {
+  type: 'onChange',
+  message: 'failed',
+};
+
 describe('Select component', () => {
   test('render select', () => {
     render(<Select options={options} defaultValue={0} />);
@@ -10,12 +16,12 @@ describe('Select component', () => {
   });
 
   test('error box disabled', () => {
-    render(<Select options={options} errorMessage={'failed'} />);
+    render(<Select options={options} />);
     expect(screen.queryByText('failed')).not.toBeInTheDocument();
   });
 
   test('error box enable', () => {
-    render(<Select options={options} isDirty={true} errorMessage={'failed'} />);
+    render(<Select options={options} error={error} />);
     expect(screen.queryByText('failed')).toBeInTheDocument();
   });
 

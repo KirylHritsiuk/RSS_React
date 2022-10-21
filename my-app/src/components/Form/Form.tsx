@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Form.module.css';
 import { FormProps } from './Form.props';
 import cn from 'classnames';
@@ -10,14 +10,18 @@ import { getAvatar } from './helpers/getAvatar';
 import { IFormCard } from './FormCard/FormCard.interface';
 import { getMinDate } from './helpers/fieldsValidator';
 
-export const Form = ({ className, addCard, ...props }: FormProps): JSX.Element => {
+export const Form = ({ className, addCard, title, ...props }: FormProps): JSX.Element => {
   const [success, setSuccess] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isDirty, isSubmitted, isValid },
+    formState: { errors, isDirty, isSubmitted, isValid, isSubmitSuccessful },
   } = useForm<IForm>();
+
+  useEffect(() => {
+    reset();
+  }, [isSubmitSuccessful, reset]);
 
   const onSubmit = (data: IForm) => {
     const card: IFormCard = Object.assign(data, {
@@ -25,8 +29,8 @@ export const Form = ({ className, addCard, ...props }: FormProps): JSX.Element =
       avatar: getAvatar(data.file),
       gender: getGender(data.gender),
     });
-    if (addCard) addCard(card);
     reset();
+    if (addCard) addCard(card);
     viewSuccess();
   };
 
@@ -41,9 +45,9 @@ export const Form = ({ className, addCard, ...props }: FormProps): JSX.Element =
       onSubmit={handleSubmit(onSubmit)}
       data-testid="form"
     >
-      {props.title && (
+      {title && (
         <Htag className={styles.title} tag="h2">
-          {props.title}
+          {title}
         </Htag>
       )}
       <Input
@@ -140,7 +144,7 @@ export const Form = ({ className, addCard, ...props }: FormProps): JSX.Element =
         label={'I consent to my personal data '}
         data-testid="agree"
       />
-      <Button type="submit" appearance="primary" disabled={!isValid && !isDirty}>
+      <Button type="submit" appearance="primary" disabled={isDirty && !isValid && isSubmitted}>
         SUBMIT
       </Button>
       <span

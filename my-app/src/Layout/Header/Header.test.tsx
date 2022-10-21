@@ -6,7 +6,7 @@ describe('Header component', () => {
   beforeEach(() => {
     render(
       <MemoryRouter initialEntries={['/']}>
-        <Header />
+        <Header title="task" />
       </MemoryRouter>
     );
   });
