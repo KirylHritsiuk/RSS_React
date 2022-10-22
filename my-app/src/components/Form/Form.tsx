@@ -58,12 +58,11 @@ export class Form extends React.Component<FormProps, IState> {
   ) => {
     const name = e.target.name as StateKeys;
     this.setState((prevState) => {
-      if (name === 'file') return;
+      if (name === ('file' || 'gender')) return;
       return { ...prevState, [name]: validData(e) };
     });
 
     if (
-      this.state.isDirty &&
       this.state.name &&
       this.state.surname &&
       this.state.birthday &&
@@ -107,6 +106,7 @@ export class Form extends React.Component<FormProps, IState> {
 
     if (form) {
       form.reset();
+      (this.agreeInput.current as HTMLInputElement).checked = false;
     }
 
     this.setState({
@@ -215,7 +215,7 @@ export class Form extends React.Component<FormProps, IState> {
           isDirty={this.state.isDirty}
           label={'I consent to my personal data '}
           errorMessage={'Please, check agree'}
-          onChange={(e) => this.setState({ agree: e.target.checked })}
+          onChange={this.onChangeHandler}
           reference={this.agreeInput}
           data-testid="agree"
         />
