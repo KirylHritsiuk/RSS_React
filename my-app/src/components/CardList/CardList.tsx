@@ -1,49 +1,14 @@
 import { CardCharacter, CardLocation, CardEpisode, Htag, Loader, Pagination } from 'components';
-import React, { useEffect, useState } from 'react';
 import { CardListProps } from './CardList.props';
 import styles from './CardList.module.css';
-import { CardListState } from './CardList.state';
-import { API } from 'interfaces/API';
-import { Character } from 'interfaces/character.interface';
-import { getResponseData } from './helpers/getResponseData';
-import { APIError } from 'interfaces/error.interface';
 import { isCharacter } from './helpers/isCharacter';
 import { isLocation } from './helpers/isLocation';
 import cn from 'classnames';
+import { useFetching } from 'Hook/useFetching';
 
 export const CardList = ({ url, className }: CardListProps): JSX.Element => {
-  const [state, setState] = useState<CardListState>({
-    character: [],
-    loading: true,
-    error: null,
-    page: 1,
-    totalPages: 0,
-    prev: null,
-    next: null,
-  });
+  const { state, changePage } = useFetching(url);
 
-  useEffect(() => {
-    fetching();
-  }, [url]);
-
-  const changePage = (url: string, page: number) => {
-    setState((prevState) => ({ ...prevState, loading: true, page }));
-    fetching(url);
-  };
-
-  const fetching = async (urlNew: string = url) => {
-    try {
-      const response = await fetch(urlNew);
-      const data: API | Character[] | Character | APIError = await response.json();
-      setState((prevState) => ({ ...prevState, ...getResponseData(data) }));
-    } catch (error) {
-      const myError = error as Error;
-      console.log('fetching', myError.message);
-      setState((prevState) => ({ ...prevState, error: myError.message }));
-    } finally {
-      setState((prevState) => ({ ...prevState, loading: false }));
-    }
-  };
   return (
     <>
       {state.error && (

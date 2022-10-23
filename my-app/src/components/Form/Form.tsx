@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './Form.module.css';
 import { FormProps } from './Form.props';
 import cn from 'classnames';
@@ -8,10 +8,13 @@ import { useForm } from 'react-hook-form';
 import { getGender } from './helpers/getGender';
 import { getAvatar } from './helpers/getAvatar';
 import { IFormCard } from './FormCard/FormCard.interface';
-import { getMinDate } from './helpers/fieldsValidator';
+import { fieldsValidator } from './helpers/fieldsValidator';
+import { getMaxDate, getMinDate } from './helpers/getDateParams';
+import { useSuccess } from 'Hook/useSuccess';
 
 export const Form = ({ className, addCard, title, ...props }: FormProps): JSX.Element => {
-  const [success, setSuccess] = useState<boolean>(false);
+  const { success, viewSuccess } = useSuccess();
+
   const {
     register,
     handleSubmit,
@@ -34,16 +37,12 @@ export const Form = ({ className, addCard, title, ...props }: FormProps): JSX.El
     viewSuccess();
   };
 
-  const viewSuccess = () => {
-    setSuccess(true);
-    setTimeout(() => setSuccess(false), 1000);
-  };
-
   return (
     <form
       className={cn(styles.form, className)}
       onSubmit={handleSubmit(onSubmit)}
       data-testid="form"
+      {...props}
     >
       {title && (
         <Htag className={styles.title} tag="h2">
@@ -53,10 +52,7 @@ export const Form = ({ className, addCard, title, ...props }: FormProps): JSX.El
       <Input
         {...register('name', {
           required: 'Please, input name',
-          minLength: {
-            value: 3,
-            message: 'Name is too short',
-          },
+          ...fieldsValidator.text,
         })}
         error={errors.name}
         type="text"
@@ -66,10 +62,7 @@ export const Form = ({ className, addCard, title, ...props }: FormProps): JSX.El
       <Input
         {...register('surname', {
           required: 'Please, input surname',
-          minLength: {
-            value: 3,
-            message: 'Surname is too short',
-          },
+          ...fieldsValidator.text,
         })}
         error={errors.surname}
         type="text"
@@ -79,14 +72,7 @@ export const Form = ({ className, addCard, title, ...props }: FormProps): JSX.El
       <Input
         {...register('zipCode', {
           required: 'Please, input zipCode',
-          minLength: {
-            value: 6,
-            message: 'ZipCode is too short',
-          },
-          maxLength: {
-            value: 12,
-            message: 'ZipCode is too long',
-          },
+          ...fieldsValidator.zipCode,
         })}
         error={errors.zipCode}
         type="number"
@@ -97,27 +83,20 @@ export const Form = ({ className, addCard, title, ...props }: FormProps): JSX.El
       <Input
         {...register('birthday', {
           required: 'Please, choose your birthday date',
-          validate: {
-            validate: (value) =>
-              new Date(value).getTime() < getMinDate() || 'Sorry, you is so young',
-          },
+          ...fieldsValidator.birthday,
         })}
         error={errors.birthday}
         type="date"
         name="birthday"
         label="Your Birthday"
-        max={`${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`}
-        min={`${new Date().getFullYear() - 120}-${new Date().getMonth() + 1}-${
-          new Date().getDate() - 1
-        }`}
+        max={getMaxDate()}
+        min={getMinDate()}
         data-testid="birthday"
       />
       <Select
         {...register('country', {
           required: 'Please, choose country',
-          validate: {
-            validate: (value) => value !== '0' || 'Please, choose country',
-          },
+          ...fieldsValidator.country,
         })}
         error={errors.country}
         name="country"
