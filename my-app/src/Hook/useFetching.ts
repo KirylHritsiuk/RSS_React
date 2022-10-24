@@ -1,8 +1,6 @@
 import { CardListState } from 'components/CardList/CardList.state';
 import { getResponseData } from 'components/CardList/helpers/getResponseData';
-import { API } from 'interfaces/API';
-import { Character } from 'interfaces/character.interface';
-import { APIError } from 'interfaces/error.interface';
+import { APIResponse } from 'interfaces/API';
 import { useCallback, useEffect, useState } from 'react';
 
 export const useFetching = (url: string) => {
@@ -20,7 +18,7 @@ export const useFetching = (url: string) => {
     async (urlNew: string = url) => {
       try {
         const response = await fetch(urlNew);
-        const data: API | Character[] | Character | APIError = await response.json();
+        const data: APIResponse = await response.json();
         setState((prevState) => ({ ...prevState, ...getResponseData(data) }));
       } catch (error) {
         const myError = error as Error;
