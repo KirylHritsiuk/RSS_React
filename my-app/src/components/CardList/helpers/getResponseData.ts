@@ -1,12 +1,6 @@
-import { API } from 'interfaces/API';
-import { Character } from 'interfaces/character.interface';
-import { Episode } from 'interfaces/episode.interface';
-import { Location } from 'interfaces/location.interface';
-import { APIError } from 'interfaces/error.interface';
+import { APIResponse } from 'interfaces/API';
 
-export const getResponseData = (
-  data: API | (Character | Episode | Location)[] | Character | Episode | Location | APIError
-) => {
+export const getResponseData = (data: APIResponse) => {
   if (data instanceof Array) {
     return {
       character: data,
