@@ -1,35 +1,50 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './Nav.module.css';
-import { NavProps } from './Nav.props';
 import cn from 'classnames';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
+import { HomeContext } from 'context/home/HomeContext';
 
-export class Nav extends React.Component<NavProps> {
-  setActive({ isActive }: { isActive: boolean }) {
+export const Nav = () => {
+  const use = useParams();
+  const state = useContext(HomeContext);
+  console.log(use);
+  const setActive = ({ isActive }: { isActive: boolean }) => {
     return isActive ? cn(styles.link, styles.activeLink) : styles.link;
-  }
+  };
 
-  render() {
-    return (
-      <nav>
-        <ul className={styles.menu}>
+  return (
+    <nav>
+      <ul className={styles.menu}>
+        {use.id && (
           <li>
-            <NavLink className={this.setActive} end to="/" data-testid="home-link">
-              Home
+            <NavLink className={setActive} to={`/${state.category}/${use.id}`}>
+              {use.id}
             </NavLink>
           </li>
+        )}
+        {state.category && (
           <li>
-            <NavLink className={this.setActive} to="/Form" data-testid="form-link">
-              Form
+            <NavLink className={setActive} to={`/${state.category}`}>
+              {state.category}
             </NavLink>
           </li>
-          <li>
-            <NavLink className={this.setActive} to="/about" data-testid="about-link">
-              About Us
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-    );
-  }
-}
+        )}
+        <li>
+          <NavLink className={setActive} end to="/" onClick={() => state.setCategory(null)}>
+            Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={setActive} to="/form">
+            Form
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={setActive} to="/about">
+            About Us
+          </NavLink>
+        </li>
+      </ul>
+    </nav>
+  );
+};
