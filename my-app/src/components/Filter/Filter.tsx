@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styles from './Filter.module.css';
 import { FilterProps } from './Filter.props';
 import cn from 'classnames';
+import { HomeContext } from 'context/home/HomeContext';
 
-export const Filter = ({ className, names, checked, updateFilter }: FilterProps) => {
+export const Filter = ({ className, names, checked }: FilterProps) => {
+  console.log('filter', checked);
   return (
     <div className={cn(styles.filter, className)} data-testid="filter">
       {names &&
@@ -16,7 +18,9 @@ export const Filter = ({ className, names, checked, updateFilter }: FilterProps)
               value={name}
               id={name}
               data-testid={name}
-              onChange={(e) => updateFilter(e.target.value)}
+              // onChange={(e) =>
+              //   checked.setCategory && checked.setCategory(e.target.value as Category)
+              // }
             />
             {name}
           </label>

@@ -12,11 +12,11 @@ export const CardList = ({ url, className }: CardListProps): JSX.Element => {
   return (
     <>
       {state.error && (
-        <Htag className={styles.error} tag="h2" data-testid={'error'}>
+        <Htag className={styles.error} tag="h2">
           {state.error}
         </Htag>
       )}
-      <div className={cn(styles.cardList, className)} data-testid="cardList">
+      <div className={cn(styles.cardList, className)}>
         {state.loading ? (
           <Loader />
         ) : (

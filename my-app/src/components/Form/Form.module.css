@@ -3,12 +3,10 @@
 	display: grid;
 	grid-auto-rows: auto;
 	align-items: center;
-	gap: 25px;
-	width: 50%;
 	margin: 0 auto;
 	border-radius: 20px;
 	box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
-	padding: 25px 40px;
+	padding: 0 40px;
 	margin-bottom: 20px;
 }
 
@@ -45,7 +43,7 @@
 }
 .success {
 	position: absolute;
-	bottom: 2px;
+	bottom: -10px;
 	left: calc(100%/2 - 50px);
 	color: var(--green);
 	background: var(--green-light);

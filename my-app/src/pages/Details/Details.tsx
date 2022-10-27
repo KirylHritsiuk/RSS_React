@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
-import { Form, FormList } from '../../components';
-import { IFormCard } from '../../components/Form/FormCard/FormCard.interface';
+import { Button } from 'components';
+import { HomeContext } from 'context/home/HomeContext';
+import { useContext } from 'react';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { DetailsProps } from './Details.props';
 
 const Details = ({}: DetailsProps) => {
-  const [formList, setFormList] = useState<IFormCard[] | []>([]);
-
-  const addCard = (card: IFormCard) => {
-    setFormList([...formList, card]);
+  const { category, id } = useParams();
+  const data = useContext(HomeContext);
+  const url = useLocation();
+  const navigate = useNavigate();
+  const goBack = () => navigate(-1);
+  const goHome = () => {
+    navigate('/', { replace: true });
+    data.setCategory(null);
   };
+  console.log('deatils', url);
   return (
-    <div data-testid="form-page">
-      <Form addCard={addCard} title="user form" />
-      {formList.length !== 0 && <FormList cards={formList} />}
-    </div>
+    <>
+      <Button appearance="primary" onClick={goBack}>
+        Go Back
+      </Button>
+      <Button appearance="ghost" onClick={goHome}>
+        Go Home
+      </Button>
+      <div data-testid="details-page">You open page of card {url.pathname}</div>
+    </>
   );
 };
 

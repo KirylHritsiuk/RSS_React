@@ -1,18 +1,24 @@
-import React, { useState } from 'react';
-import { Form, FormList } from '../../components';
-import { IFormCard } from '../../components/Form/FormCard/FormCard.interface';
+import { useContext } from 'react';
+import { Form, FormList, Htag } from '../../components';
 import { FormPageProps } from './FormPage.props';
+import styles from './FormPage.module.css';
+import { FormContext } from 'context/form/FormContext';
 
 const FormPage = ({}: FormPageProps) => {
-  const [formList, setFormList] = useState<IFormCard[] | []>([]);
+  const { cards, addCard } = useContext(FormContext);
 
-  const addCard = (card: IFormCard) => {
-    setFormList([...formList, card]);
-  };
   return (
-    <div data-testid="form-page">
-      <Form addCard={addCard} title="user form" />
-      {formList.length !== 0 && <FormList cards={formList} />}
+    <div className={styles.main} data-testid="form-page">
+      {cards.length !== 0 ? (
+        <FormList cards={cards} />
+      ) : (
+        <Htag tag="h2" className={styles.noCard}>
+          NO CARD
+        </Htag>
+      )}
+      <div className={styles.form}>
+        <Form addCard={addCard} title="user form" className={styles.form} />
+      </div>
     </div>
   );
 };

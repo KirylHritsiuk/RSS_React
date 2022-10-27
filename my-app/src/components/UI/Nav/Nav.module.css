@@ -10,6 +10,8 @@
 	color: var(--black);
 	flex-grow: 1;
 	transition: all 0.3s;
+
+	text-transform: capitalize;
 }
 
 .link:hover {

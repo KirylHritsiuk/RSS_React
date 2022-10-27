@@ -1,9 +1,11 @@
 import { CardListState } from 'components/CardList/CardList.state';
 import { getResponseData } from 'components/CardList/helpers/getResponseData';
+import { HomeContext } from 'context/home/HomeContext';
 import { APIResponse } from 'interfaces/API';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 
 export const useFetching = (url: string) => {
+  const homeData = useContext(HomeContext);
   const [state, setState] = useState<CardListState>({
     character: [],
     loading: true,

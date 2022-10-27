@@ -1,9 +1,9 @@
-import React, { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { Category } from 'context';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export interface FilterProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  names?: string[];
-  checked?: string;
-  // onFilterChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  names?: Category[];
+  checked?: Category;
   updateFilter: (data: string) => void;
 }
