@@ -1,0 +1,41 @@
+.main {
+	display: grid;
+	grid-template-rows: max-content 1fr;
+	gap: 10px;
+}
+
+.buttons {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: center;
+	gap: 10px;
+	padding: 0 3%;
+}
+
+.card {
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 20px;
+	padding: 0 5%;
+
+	height: 100%;
+}
+.card img {
+	width: 300px;
+	height: 300px;
+	box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+}
+
+.card h2 {
+	margin: 0;
+}
+
+.card ul {
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+
+	font-size: 20px;
+}

@@ -1,3 +1,5 @@
+import { CharacterFilter } from './character.interface';
+
 export interface Episode {
   id: number;
   name: string;
@@ -6,4 +8,8 @@ export interface Episode {
   characters: string[];
   url: string;
   created: string;
+}
+
+export interface EpisodeFilter extends Pick<CharacterFilter, 'name' | 'page'> {
+  episode?: string;
 }

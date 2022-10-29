@@ -1,6 +1,3 @@
-import { Character } from './character.interface';
-import { Location } from './location.interface';
-import { Episode } from './episode.interface';
 import { APIError } from './error.interface';
 
 export interface Info {
@@ -12,15 +9,9 @@ export interface Info {
 
 export type category = 'characters' | 'locations' | 'episodes';
 
-export interface API {
+export interface API<T> {
   info: Info;
-  results: (Character | Location | Episode)[];
+  results: T[];
 }
 
-export type APIResponse =
-  | API
-  | (Character | Episode | Location)[]
-  | Character
-  | Episode
-  | Location
-  | APIError;
+export type APIResponse<T> = API<T> | T[] | T | APIError;

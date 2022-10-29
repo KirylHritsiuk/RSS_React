@@ -1,53 +1,48 @@
+import { getPage } from 'components/UI/Pagination/helpers/getPage';
+import { Categories } from 'context/home/HomeContext';
 import { APIResponse } from 'interfaces/API';
 
-export const getResponseData = (data: APIResponse) => {
-  if (data instanceof Array) {
+export const getResponseData = <T>(responseData: APIResponse<T>): Categories<T> => {
+  if (responseData instanceof Array) {
     return {
-      character: data,
-      totalPages: 0,
+      cards: responseData,
+      pages: 0,
+      page: 0,
+      count: responseData.length,
       prev: null,
       next: null,
       error: null,
     };
-  } else if ('info' in data) {
+  } else if ('info' in responseData) {
     return {
-      character: data.results,
-      totalPages: data.info?.pages,
-      prev: data.info.prev,
-      next: data.info.next,
+      cards: responseData.results,
+      pages: responseData.info.pages,
+      page: getPage(responseData.info.prev),
+      count: responseData.info.count,
+      prev: responseData.info.prev,
+      next: responseData.info.next,
       error: null,
     };
-  } else if ('gender' in data) {
+  } else if ('error' in responseData) {
+    console.log('error', responseData.error);
     return {
-      character: [data],
-      totalPages: 0,
+      cards: null,
+      pages: 0,
+      page: 0,
+      count: 0,
+      prev: null,
+      next: null,
+      error: responseData.error,
+    };
+  } else {
+    return {
+      cards: [responseData],
+      pages: 0,
+      page: 0,
+      count: 1,
       prev: null,
       next: null,
       error: null,
-    };
-  } else if ('dimension' in data) {
-    return {
-      character: [data],
-      totalPages: 0,
-      prev: null,
-      next: null,
-      error: null,
-    };
-  } else if ('air_date' in data) {
-    return {
-      character: [data],
-      totalPages: 0,
-      prev: null,
-      next: null,
-      error: null,
-    };
-  } else if ('error' in data) {
-    return {
-      character: [],
-      totalPages: 0,
-      prev: null,
-      next: null,
-      error: data.error,
     };
   }
 };

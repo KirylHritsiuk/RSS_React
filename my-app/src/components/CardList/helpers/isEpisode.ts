@@ -1,7 +1,6 @@
-import { Character } from 'interfaces/character.interface';
+import { CAT } from 'context/home/HomeContext';
 import { Episode } from 'interfaces/episode.interface';
-import { Location } from 'interfaces/location.interface';
 
-export function isEpisode(data: Character | Episode | Location): data is Episode {
-  return (data as Episode).air_date !== undefined;
+export function isEpisode(data: CAT[] | null): data is Episode[] {
+  return data ? (data as Episode[])[0].air_date !== undefined : false;
 }
