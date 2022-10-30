@@ -1,15 +1,24 @@
 .pagination {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 5px;
     justify-self: center;
+    align-items: center;
 }
 
 .page {
-    padding: 5px;
+    padding: 5px 10px;
     border: 1px solid var(--primary);
     cursor: pointer;
     border-radius: 5px;
+    color: var(--primary)
+}
+
+
+.disabled {
+    border-color: var(--gray);
+    color: var(--gray);
+    cursor: default;
 }
 
 .page:hover:not(.current, .disabled) {
@@ -18,11 +27,7 @@
 
 .current {
     border: 2px solid var(--red);
-    color: var(--red);
+    color: var(--red) !important;
     font-weight: bold;
 }
 
-.disabled {
-    border-color: var(--gray);
-    color: var(--gray);
-}
