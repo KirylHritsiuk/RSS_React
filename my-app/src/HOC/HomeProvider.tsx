@@ -1,18 +1,18 @@
-import { Category } from 'context';
-import { HomeContext, state } from 'context/home/HomeContext';
-import { HomeReducer } from 'context/home/reducer';
-import { ReactNode, useReducer } from 'react';
+import { CAT, HomeContext, HomeState, init, initialState } from 'context/home/HomeContext';
+import { Action, HomeReducer } from 'context/home/reducer';
+import React, { ReactNode, Reducer, useReducer } from 'react';
 
 interface HomeProviderProps {
   children: ReactNode;
 }
 
 const HomeProvider = ({ children }: HomeProviderProps) => {
-  const [data, dispatch] = useReducer(HomeReducer, state);
-  const setCategory = (data: Category | null) => {
-    dispatch({ type: data, payload: data });
-  };
-  return <HomeContext.Provider value={{ ...data, setCategory }}>{children}</HomeContext.Provider>;
+  const [state, dispatch] = useReducer<Reducer<HomeState<CAT>, Action<CAT>>>(
+    HomeReducer,
+    initialState
+  );
+
+  return <HomeContext.Provider value={{ state, dispatch }}>{children}</HomeContext.Provider>;
 };
 
 export default HomeProvider;

@@ -23,7 +23,13 @@ export interface CharacterFilter {
   name?: string;
   type?: string;
   species?: string;
-  status?: 'Dead' | 'Alive' | 'unknown';
-  gender?: 'Female' | 'Male' | 'Genderless' | 'unknown';
+  status?: ('Dead' | 'Alive' | 'unknown')[];
+  gender?: {
+    Female: boolean;
+    Male: boolean;
+    Genderless: boolean;
+    unknown: boolean;
+  };
+  // gender?: ('Female' | 'Male' | 'Genderless' | 'unknown')[];
   page?: number;
 }

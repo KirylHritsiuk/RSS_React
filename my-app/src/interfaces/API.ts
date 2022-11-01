@@ -7,7 +7,7 @@ export interface Info {
   prev: string | null;
 }
 
-export type category = 'characters' | 'locations' | 'episodes';
+export type category = 'character' | 'location' | 'episode';
 
 export interface API<T> {
   info: Info;

@@ -1,51 +1,67 @@
-import { createContext } from 'react';
+import { category } from 'interfaces/API';
+import { Character, CharacterFilter } from 'interfaces/character.interface';
+import { Episode, EpisodeFilter } from 'interfaces/episode.interface';
+import { Location, LocationFilter } from 'interfaces/location.interface';
+import { createContext, Dispatch } from 'react';
+import { Action } from './reducer';
 
-interface Categories {
-  loading: boolean;
+export type CAT = Character | Location | Episode;
+export type CATFil = CharacterFilter | LocationFilter | EpisodeFilter;
+export interface Categories<T> {
+  cards: T[] | null;
   error: string | null;
-  page: number;
-  totalPages: number;
-  prev: null | string;
-  next: null | string;
+  count: number | null;
+  pages: number | null;
+  prev: string | null;
+  next: string | null;
+}
+export type gender = 'Female' | 'Male' | 'Genderless' | 'unknown' | 'All';
+export type status = 'Dead' | 'Alive' | 'unknown' | 'All';
+export interface Filter {
+  name?: string;
+  gender?: gender;
+  status?: status;
+  page?: number;
 }
 
-export type Category = 'character' | 'episode' | 'location';
-
-export interface HomeContext {
-  category: Category | null;
-  characters: Categories;
-  locations: Categories;
-  episodes: Categories;
-  setCategory: (data: Category | null) => void;
+export interface HomeState<T> {
+  url: 'https://rickandmortyapi.com/api/';
+  filter: Filter;
+  category: category | null;
+  loading: boolean;
+  error?: string;
+  data: Categories<T>;
 }
 
-export const state: HomeContext = {
+export const initialState: HomeState<CAT> = {
+  url: 'https://rickandmortyapi.com/api/',
+  filter: {
+    name: '',
+    gender: 'All',
+    status: 'All',
+    page: 1,
+  },
   category: null,
-  characters: {
-    loading: true,
+  loading: true,
+  data: {
+    cards: null,
     error: null,
-    page: 1,
-    totalPages: 0,
+    pages: null,
+    count: null,
     prev: null,
     next: null,
   },
-  locations: {
-    loading: true,
-    error: null,
-    page: 1,
-    totalPages: 0,
-    prev: null,
-    next: null,
-  },
-  episodes: {
-    loading: true,
-    error: null,
-    page: 1,
-    totalPages: 0,
-    prev: null,
-    next: null,
-  },
-  setCategory: () => {},
 };
 
-export const HomeContext = createContext<HomeContext>(state);
+export const init = (state: HomeState<CAT>) => {
+  return Object.assign(state, initialState);
+};
+export interface HomeContext<T> {
+  state: HomeState<T>;
+  dispatch: Dispatch<Action<T>>;
+}
+
+export const HomeContext = createContext<HomeContext<CAT>>({
+  state: initialState,
+  dispatch: () => {},
+});

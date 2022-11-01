@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
 import styles from './Nav.module.css';
 import cn from 'classnames';
-import { NavLink, useParams } from 'react-router-dom';
-import { HomeContext } from 'context/home/HomeContext';
+import { NavLink } from 'react-router-dom';
+import { useCategory } from 'Hook/useCategory';
+import { getCardById } from 'pages/Details/helpers/getCardById';
 
 export const Nav = () => {
-  const use = useParams();
-  const state = useContext(HomeContext);
-  console.log(use);
+  const { params, state, setCategory } = useCategory();
+  const card = getCardById(params, state);
   const setActive = ({ isActive }: { isActive: boolean }) => {
     return isActive ? cn(styles.link, styles.activeLink) : styles.link;
   };
@@ -15,10 +14,10 @@ export const Nav = () => {
   return (
     <nav>
       <ul className={styles.menu}>
-        {use.id && (
+        {params.id && (
           <li>
-            <NavLink className={setActive} to={`/${state.category}/${use.id}`}>
-              {use.id}
+            <NavLink className={setActive} to={`/${params.category}/${params.id}`}>
+              {card?.name}
             </NavLink>
           </li>
         )}
@@ -30,7 +29,7 @@ export const Nav = () => {
           </li>
         )}
         <li>
-          <NavLink className={setActive} end to="/" onClick={() => state.setCategory(null)}>
+          <NavLink className={setActive} end to="/" onClick={() => setCategory()}>
             Home
           </NavLink>
         </li>

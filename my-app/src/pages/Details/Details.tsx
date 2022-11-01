@@ -1,23 +1,18 @@
 import { Button, Htag } from 'components';
 import { HomeContext } from 'context/home/HomeContext';
-import { useCategory } from 'Hook/useCategory';
 import { useContext } from 'react';
-import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import { getCardById } from './helpers/getCardById';
 import styles from './Details.module.css';
+import { Timer } from 'components/UI/Timer/Timer';
+import { useMyNavigate } from 'Hook/useMyNavigate';
+import { useParams } from 'react-router-dom';
 
 const Details = () => {
-  const { params, setCategory } = useCategory();
   const { state } = useContext(HomeContext);
+  const params = useParams();
   const card = getCardById(params, state);
-  const url = useLocation();
-  const navigate = useNavigate();
-  const goBack = () => navigate(-1);
-  const goHome = () => {
-    navigate('/', { replace: true });
-    setCategory(undefined);
-  };
-  console.log('deatils', url);
+  const { goBack, goHome } = useMyNavigate(card);
+
   return (
     <div className={styles.main}>
       <div className={styles.buttons}>
@@ -41,12 +36,16 @@ const Details = () => {
               <li>species: {card.species}</li>
               <li>type: {card.type}</li>
               <li>origin: {card.origin.name}</li>
-              <li>You open page of card {url.pathname}</li>
+              <li>location: {card.origin.name}</li>
             </ul>
           </>
         ) : (
-          // redirect('/')
-          <></>
+          <>
+            <Htag tag="h2">Sorry this card not here!</Htag>
+            <Htag tag="h3">
+              Redirect to Home from <Timer time={5} />
+            </Htag>
+          </>
         )}
       </div>
     </div>

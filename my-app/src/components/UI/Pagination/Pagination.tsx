@@ -1,7 +1,7 @@
 import styles from './Pagination.module.css';
 import ReactPaginate from 'react-paginate';
-import { useFetching } from 'Hook/useFetching';
 import { PaginationProps } from './Pagination.props';
+import { useUrl } from 'Hook/useUrl';
 interface PagOnClick {
   index: number | null;
   selected: number;
@@ -16,19 +16,11 @@ interface PagOnClick {
 interface selectedItem {
   selected: number;
 }
-export const Pagination = ({}: PaginationProps): JSX.Element => {
-  const { state, changePage } = useFetching();
+export const Pagination = ({ state, changePage }: PaginationProps): JSX.Element => {
+  const { createURL } = useUrl();
 
   const handlePageChange = ({ selected }: selectedItem) => {
-    changePage(
-      state.url +
-        state.category +
-        state.query +
-        state.pag +
-        `${selected + 1}` +
-        state.name +
-        state.search
-    );
+    changePage(createURL(undefined, selected + 1));
   };
 
   const change = ({ isPrevious, isNext }: PagOnClick) => {
@@ -57,7 +49,7 @@ export const Pagination = ({}: PaginationProps): JSX.Element => {
         containerClassName={styles.pagination}
         activeClassName={styles.current}
         disabledClassName={styles.disabled}
-        forcePage={state.data.page - 1}
+        forcePage={state.filter.page ? state.filter.page - 1 : undefined}
         prevPageRel={state.data.prev}
         nextPageRel={state.data.next}
       />

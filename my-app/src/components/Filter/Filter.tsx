@@ -1,26 +1,26 @@
-import React, { useContext } from 'react';
 import styles from './Filter.module.css';
 import { FilterProps } from './Filter.props';
 import cn from 'classnames';
-import { HomeContext } from 'context/home/HomeContext';
+import { Htag } from 'components/UI/Htag/Htag';
 
-export const Filter = ({ className, names, checked }: FilterProps) => {
-  console.log('filter', checked);
+export const Filter = ({ className, names, checked, type, label, updateFilter }: FilterProps) => {
   return (
-    <div className={cn(styles.filter, className)} data-testid="filter">
+    <div className={cn(styles.filter, className)}>
+      {label && (
+        <Htag tag="h3" className={styles.title}>
+          {label}
+        </Htag>
+      )}
       {names &&
         names.map((name) => (
-          <label className={styles.item} htmlFor={name} key={name}>
+          <label className={styles.item} htmlFor={name + label} key={name}>
             <input
-              type="radio"
-              defaultChecked={name === checked ? true : false}
-              name="filter"
+              type={type}
+              defaultChecked={checked === name}
+              name={`${label} filter`}
               value={name}
-              id={name}
-              data-testid={name}
-              // onChange={(e) =>
-              //   checked.setCategory && checked.setCategory(e.target.value as Category)
-              // }
+              id={name + label}
+              onChange={updateFilter}
             />
             {name}
           </label>

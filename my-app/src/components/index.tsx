@@ -16,3 +16,4 @@ export * from './UI/Switcher/Switcher';
 export * from './UI/Modal/Modal';
 export * from './UI/Loader/Loader';
 export * from './UI/Pagination/Pagination';
+export * from './UI/Timer/Timer';

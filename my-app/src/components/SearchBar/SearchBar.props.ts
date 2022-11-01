@@ -1,10 +1,9 @@
-import { Category } from 'context';
+import { category } from 'interfaces/API';
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 export interface SearchBarProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-  updateQuery: (data: string) => void;
-  updateFilter: (data: string) => void;
-  filter?: Category[];
-  checked?: Category;
+  updateQuery?: (data: string) => void;
+  filter?: category[];
+  checked?: category | null;
 }

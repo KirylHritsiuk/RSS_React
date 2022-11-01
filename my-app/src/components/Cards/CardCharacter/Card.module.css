@@ -68,35 +68,3 @@
 	background-color: var(--white);
 	opacity: 0;
 }
-
-.modal {
-	position: relative;
-}
-
-.modal button {
-	position: absolute;
-	right: 5px;
-	top: 5px;
-	padding: 0;
-	width: 25px;
-	height: 25px;
-	border-radius: 50%;
-	border: none;
-}
-
-.modal h2 {
-	margin-top: 0;
-	line-height: 22px;
-	font-size: 30px;
-}
-
-.modalContent {
-	display: flex;
-	flex-direction: row;
-	gap: 10px;
-}
-
-.modalContent img {
-	width: 150px;
-	height: 150px;
-}

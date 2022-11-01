@@ -3,42 +3,48 @@ import { ReactComponent as SearchIcon } from './search.svg';
 import { Button, Filter } from 'components';
 import styles from './SearchBar.module.css';
 import { useSearch } from 'Hook/useSearch';
+import { useUpdateFilter } from 'Hook/useUpdateFilter';
 
-export const SearchBar = ({
-  updateQuery,
-  updateFilter,
-  filter,
-  checked,
-}: SearchBarProps): JSX.Element => {
-  const { search, onInputChange, onSearch } = useSearch(updateQuery);
-  console.log('search render');
+export const SearchBar = ({}: SearchBarProps): JSX.Element => {
+  const { search, onInputChange, onSearch, updateQuery } = useSearch();
+  const { state, updateFilter, category } = useUpdateFilter();
+
   return (
     <div className={styles.searchBar}>
       <div className={styles.search}>
         <SearchIcon />
         <input
           type="search"
-          data-testid="input"
           placeholder="Search..."
           className={styles.searchInput}
           onChange={onInputChange}
           value={search}
           onKeyDown={onSearch}
         />
-        <Button
-          appearance="primary"
-          className={styles.searchButton}
-          onClick={() => updateQuery(search)}
-        >
+        <Button appearance="primary" className={styles.searchButton} onClick={updateQuery}>
           Search
         </Button>
       </div>
-      <Filter
-        className={styles.filter}
-        names={filter}
-        checked={checked}
-        updateFilter={updateFilter}
-      />
+      {category === 'character' && (
+        <>
+          <Filter
+            className={styles.filter}
+            label="gender"
+            names={['All', 'Male', 'Female', 'Genderless', 'unknown']}
+            type={'radio'}
+            checked={state.filter.gender}
+            updateFilter={(e) => updateFilter(e, 'gender')}
+          />
+          <Filter
+            className={styles.filter}
+            label="status"
+            names={['All', 'Dead', 'Alive', 'unknown']}
+            type={'radio'}
+            checked={state.filter.status}
+            updateFilter={(e) => updateFilter(e, 'status')}
+          />
+        </>
+      )}
     </div>
   );
 };

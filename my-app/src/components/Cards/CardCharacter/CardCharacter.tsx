@@ -1,4 +1,3 @@
-import React from 'react';
 import { CardProps } from './Card.props';
 import { Htag } from 'components';
 import { Button } from 'components';
@@ -8,7 +7,6 @@ import { Link, useLocation } from 'react-router-dom';
 
 export const CardCharacter = ({ data, className }: CardProps) => {
   const url = useLocation();
-  console.log(url);
 
   return (
     <>
@@ -20,8 +18,8 @@ export const CardCharacter = ({ data, className }: CardProps) => {
           {data.name}
         </Htag>
         <div className={styles.buttonWrapper}>
-          <Button data-testid="button" appearance="ghost" className={styles.button}>
-            <Link to={`${url.pathname}/${data.name}`}>Show more</Link>
+          <Button appearance="ghost" className={styles.button}>
+            <Link to={`${url.pathname}/${data.id}`}>Show more</Link>
           </Button>
         </div>
       </div>

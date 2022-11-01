@@ -1,25 +1,23 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { HomeContext } from 'context/home/HomeContext';
+import React, { ChangeEvent, useContext, useState } from 'react';
 
-export const useSearch = (updateQuery: (data: string) => void) => {
-  const key = 'search';
-  const [search, setSearch] = useState<string>(localStorage.getItem(key) || '');
-
-  useEffect(() => {
-    localStorage.setItem(key, search);
-    return () => {
-      localStorage.setItem(key, search);
-    };
-  }, [search]);
+export const useSearch = () => {
+  const { state, dispatch } = useContext(HomeContext);
+  const [search, setSearch] = useState<string | undefined>(state.filter.name);
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(() => e.target.value);
+    setSearch(e.target.value);
+  };
+
+  const updateQuery = () => {
+    dispatch({ type: 'name', payload: { filter: { name: search } } });
   };
 
   const onSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      updateQuery(search);
+      dispatch({ type: 'name', payload: { filter: { name: e.currentTarget.value } } });
       e.currentTarget.blur();
     }
   };
-  return { search, setSearch, onInputChange, onSearch };
+  return { search, onInputChange, onSearch, updateQuery };
 };

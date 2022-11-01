@@ -1,32 +1,30 @@
-import { CardListState } from 'components/CardList/CardList.state';
 import { getResponseData } from 'components/CardList/helpers/getResponseData';
-import { HomeContext } from 'context/home/HomeContext';
+import { getPage } from 'components/UI/Pagination/helpers/getPage';
+import { CAT, HomeContext } from 'context/home/HomeContext';
 import { APIResponse } from 'interfaces/API';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useUrl } from './useUrl';
 
-export const useFetching = (url: string) => {
-  const homeData = useContext(HomeContext);
-  const [state, setState] = useState<CardListState>({
-    character: [],
-    loading: true,
-    error: null,
-    page: 1,
-    totalPages: 0,
-    prev: null,
-    next: null,
-  });
+export const useFetching = <T extends CAT>() => {
+  const { state, dispatch } = useContext(HomeContext);
+  const { category } = useParams();
+  const { url } = useUrl();
 
   const fetching = useCallback(
     async (urlNew: string = url) => {
       try {
         const response = await fetch(urlNew);
-        const data: APIResponse = await response.json();
-        setState((prevState) => ({ ...prevState, ...getResponseData(data) }));
+        const res: APIResponse<T> = await response.json();
+        const resData = getResponseData<T>(res);
+        debugger;
+        dispatch({ type: 'fetching', payload: { data: resData } });
+        dispatch({ type: 'page', payload: { filter: { page: getPage(resData.prev) } } });
       } catch (error) {
         const myError = error as Error;
-        setState((prevState) => ({ ...prevState, error: myError.message }));
+        dispatch({ type: 'fetching', payload: { error: myError.message } });
       } finally {
-        setState((prevState) => ({ ...prevState, loading: false }));
+        dispatch({ type: 'loading', payload: { loading: false } });
       }
     },
     [url]
@@ -34,12 +32,13 @@ export const useFetching = (url: string) => {
 
   useEffect(() => {
     fetching();
-  }, [url, fetching]);
+    return () => dispatch({ type: 'loading', payload: { loading: true } });
+  }, [url]);
 
-  const changePage = (url: string, page: number) => {
-    setState((prevState) => ({ ...prevState, loading: true, page }));
+  const changePage = (url: string) => {
+    dispatch({ type: 'loading', payload: { loading: true } });
     fetching(url);
   };
 
-  return { state, setState, fetching, changePage };
+  return { state, fetching, changePage, dispatch, category };
 };
