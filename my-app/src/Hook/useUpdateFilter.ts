@@ -1,35 +1,37 @@
 import { gender, status } from 'context/home/HomeContext';
 import { useFetching } from './useFetching';
+import { useUrl } from './useUrl';
 
 export const useUpdateFilter = () => {
   const { state, changePage, dispatch, category } = useFetching();
+  const { url, createURL } = useUrl();
 
   const updateFilter = (e: React.ChangeEvent<HTMLInputElement>, label: 'status' | 'gender') => {
+    const item = e.target.value as gender | status;
     dispatch({
       type: label,
-      payload: { filter: { [label]: e.target.value as gender | status } },
+      payload: { filter: { [label]: item } },
     });
-
-    const url = `${state.url}${category}?page=${state.filter.page}&name=${state.filter.name}`;
 
     switch (label) {
       case 'gender':
-        const hasAllInStatus = state.filter.status === 'All' ? '' : state.filter.status;
         if (e.target.value !== 'All') {
-          changePage(url + '&status=' + hasAllInStatus + '&gender=' + e.target.value);
-        } else {
-          changePage(url + '&status=' + hasAllInStatus);
+          const urlGender = createURL(undefined, undefined, undefined, item as gender);
+          changePage(urlGender);
+          break;
         }
+        changePage(createURL());
         break;
 
       case 'status':
-        const hasAllInGender = state.filter.gender === 'All' ? '' : state.filter.gender;
         if (e.target.value !== 'All') {
-          changePage(url + '&gender=' + hasAllInGender + '&status=' + e.target.value);
-        } else {
-          changePage(url + '&gender=' + hasAllInGender);
+          const urlStatus = createURL(undefined, undefined, undefined, undefined, item as status);
+          changePage(urlStatus);
+          break;
         }
+        changePage(createURL());
         break;
+
       default:
         changePage(url);
     }

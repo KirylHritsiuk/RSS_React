@@ -10,13 +10,13 @@ export const useUrl = () => {
   const isCategory = state.category ? state.category : category;
   const status = state.filter.status === 'All' ? '' : `&status=${state.filter.status}`;
   const gender = state.filter.gender === 'All' ? '' : `&gender=${state.filter.gender}`;
-  const isCharacter = category === 'character' ? status + gender : '';
+  const hasCharacter = category === 'character' ? status + gender : '';
   const url =
     state.url +
     isCategory +
     `?page=${state.filter.page}` +
     `&name=${state.filter.name}` +
-    isCharacter;
+    hasCharacter;
 
   const createURL = (
     category?: category,
