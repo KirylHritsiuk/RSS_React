@@ -7,7 +7,6 @@ export interface Action<T> {
 
 export const HomeReducer = <T extends CAT>(state: HomeState<T>, action: Action<T>) => {
   const { type, payload } = action;
-  console.log('reducer run');
   switch (type) {
     case 'category':
       if (payload.category !== undefined) {
