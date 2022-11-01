@@ -37,10 +37,7 @@ export const validData = (
 
       return true;
     case 'agree':
-      if (e.target.value === 'off') {
-        return false;
-      }
-      return true;
+      return (e.target as HTMLInputElement).checked;
     case 'file':
       return false;
   }
