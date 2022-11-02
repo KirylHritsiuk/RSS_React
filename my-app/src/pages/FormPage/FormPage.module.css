@@ -12,3 +12,11 @@
 .noCard {
 	text-align: center;
 }
+
+@media screen and (max-width: 769px) {
+	.main {
+		display: flex;
+		flex-direction: column-reverse;
+		gap: 20px;
+	}
+}
