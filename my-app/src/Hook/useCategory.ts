@@ -41,5 +41,5 @@ export const useCategory = () => {
       setCategory(params.category);
   }, [params]);
 
-  return { params, state, setCategory };
+  return { params, state, dispatch, setCategory };
 };

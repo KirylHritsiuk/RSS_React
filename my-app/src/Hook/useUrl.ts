@@ -38,5 +38,5 @@ export const useUrl = () => {
       }`;
     }
   };
-  return { url, createURL };
+  return { url, createURL, category };
 };

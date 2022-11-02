@@ -1,4 +1,4 @@
-import { CAT, HomeState, init } from './HomeContext';
+import { CAT, HomeState, init, initialState } from './HomeContext';
 
 export interface Action<T> {
   type: string | null;
@@ -56,7 +56,7 @@ export const HomeReducer = <T extends CAT>(state: HomeState<T>, action: Action<T
       }
       return state;
     case 'reset':
-      return init(state);
+      return Object.assign(state, payload);
     default:
       return state;
   }

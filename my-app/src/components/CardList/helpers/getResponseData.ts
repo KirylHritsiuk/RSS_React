@@ -21,7 +21,6 @@ export const getResponseData = <T>(responseData: APIResponse<T>): Categories<T> 
       error: null,
     };
   } else if ('error' in responseData) {
-    console.log('error', responseData.error);
     return {
       cards: null,
       pages: null,

@@ -3,13 +3,11 @@ import { getPage } from 'components/UI/Pagination/helpers/getPage';
 import { CAT, HomeContext } from 'context/home/HomeContext';
 import { APIResponse } from 'interfaces/API';
 import { useCallback, useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import { useUrl } from './useUrl';
 
 export const useFetching = <T extends CAT>() => {
   const { state, dispatch } = useContext(HomeContext);
-  const { category } = useParams();
-  const { url } = useUrl();
+  const { url, category } = useUrl();
 
   const fetching = useCallback(
     async (urlNew: string = url) => {
@@ -17,7 +15,6 @@ export const useFetching = <T extends CAT>() => {
         const response = await fetch(urlNew);
         const res: APIResponse<T> = await response.json();
         const resData = getResponseData<T>(res);
-        debugger;
         dispatch({ type: 'fetching', payload: { data: resData } });
         dispatch({ type: 'page', payload: { filter: { page: getPage(resData.prev) } } });
       } catch (error) {

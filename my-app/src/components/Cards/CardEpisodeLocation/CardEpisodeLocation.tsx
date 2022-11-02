@@ -5,18 +5,17 @@ import styles from './Card.module.css';
 import cn from 'classnames';
 import { Link, useLocation } from 'react-router-dom';
 
-export const CardLocation = ({ data, className }: CardProps) => {
+export const CardEpisodeLocation = ({ data, className }: CardProps) => {
   const url = useLocation();
+
   return (
-    <div className={cn(styles.card, className)} data-testid="cardLocation">
+    <div className={cn(styles.card, className)}>
       <Htag tag="h2" className={styles.title}>
         {data.name}
       </Htag>
-      <p>Types: {data.type}</p>
-      <p>Species: {data.dimension}</p>
       <div className={styles.buttonWrapper}>
         <Button appearance="ghost" className={styles.button}>
-          {/* <Link to={`${url.pathname}/${data.id}`}>Show more</Link> */}
+          <Link to={`${url.pathname}/${data.id}`}>Show more</Link>
         </Button>
       </div>
     </div>

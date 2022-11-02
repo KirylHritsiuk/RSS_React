@@ -1,12 +1,12 @@
 import { category } from 'interfaces/API';
-import { Character, CharacterFilter } from 'interfaces/character.interface';
-import { Episode, EpisodeFilter } from 'interfaces/episode.interface';
-import { Location, LocationFilter } from 'interfaces/location.interface';
+import { Character } from 'interfaces/character.interface';
+import { Episode } from 'interfaces/episode.interface';
+import { Location } from 'interfaces/location.interface';
 import { createContext, Dispatch } from 'react';
 import { Action } from './reducer';
 
 export type CAT = Character | Location | Episode;
-export type CATFil = CharacterFilter | LocationFilter | EpisodeFilter;
+
 export interface Categories<T> {
   cards: T[] | null;
   error: string | null;
@@ -29,7 +29,7 @@ export interface HomeState<T> {
   filter: Filter;
   category: category | null;
   loading: boolean;
-  error?: string;
+  error: string | null;
   data: Categories<T>;
 }
 
@@ -43,6 +43,7 @@ export const initialState: HomeState<CAT> = {
   },
   category: null,
   loading: true,
+  error: null,
   data: {
     cards: null,
     error: null,
@@ -53,8 +54,8 @@ export const initialState: HomeState<CAT> = {
   },
 };
 
-export const init = (state: HomeState<CAT>) => {
-  return Object.assign(state, initialState);
+export const init = (state: Required<HomeState<CAT>>) => {
+  return { ...state };
 };
 export interface HomeContext<T> {
   state: HomeState<T>;

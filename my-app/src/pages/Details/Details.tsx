@@ -1,17 +1,10 @@
 import { Button, Htag } from 'components';
-import { HomeContext } from 'context/home/HomeContext';
-import { useContext } from 'react';
-import { getCardById } from './helpers/getCardById';
 import styles from './Details.module.css';
 import { Timer } from 'components/UI/Timer/Timer';
-import { useMyNavigate } from 'Hook/useMyNavigate';
-import { useParams } from 'react-router-dom';
+import { useCardNavigate } from 'Hook/useCardNavigate';
 
 const Details = () => {
-  const { state } = useContext(HomeContext);
-  const params = useParams();
-  const card = getCardById(params, state);
-  const { goBack, goHome } = useMyNavigate(card);
+  const { card, goBack, goHome } = useCardNavigate();
 
   return (
     <div className={styles.main}>
@@ -26,17 +19,33 @@ const Details = () => {
       <div className={styles.card}>
         {card ? (
           <>
-            <img src={`${card.image}`} alt={`${card.name}`} />
+            {'gender' in card && <img src={`${card.image}`} alt={`${card.name}`} />}
             <ul>
               <li>
                 <Htag tag="h2">{card.name}</Htag>
               </li>
-              <li>gender: {card.gender}</li>
-              <li>status: {card.status}</li>
-              <li>species: {card.species}</li>
-              <li>type: {card.type}</li>
-              <li>origin: {card.origin.name}</li>
-              <li>location: {card.origin.name}</li>
+              {'gender' in card && (
+                <>
+                  <li>gender: {card.gender}</li>
+                  <li>status: {card.status}</li>
+                  <li>species: {card.species}</li>
+                  {card.type !== '' && <li>type: {card.type}</li>}
+                  <li>location: {card.location.name}</li>
+                  <li>origin: {card.origin.name}</li>
+                </>
+              )}
+              {'air_date' in card && (
+                <>
+                  <li>episode: {card.episode}</li>
+                  <li>air date: {card.air_date}</li>
+                </>
+              )}
+              {'dimension' in card && (
+                <>
+                  <li>dimension: {card.dimension}</li>
+                  <li>type: {card.type}</li>
+                </>
+              )}
             </ul>
           </>
         ) : (
