@@ -1,8 +1,9 @@
-import { HomeContext } from 'context/home/HomeContext';
-import React, { ChangeEvent, useContext, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
+import { name } from 'store/slices/Home/HomeSlice';
+import useHome from './useHome';
 
 export const useSearch = () => {
-  const { state, dispatch } = useContext(HomeContext);
+  const { state, dispatch } = useHome();
   const [search, setSearch] = useState<string | undefined>(state.filter.name);
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -10,13 +11,13 @@ export const useSearch = () => {
   };
 
   const updateQuery = () => {
-    dispatch({ type: 'name', payload: { filter: { name: search } } });
+    dispatch(name(search ?? ''));
   };
 
   const onSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      dispatch({ type: 'name', payload: { filter: { name: e.currentTarget.value } } });
       e.currentTarget.blur();
+      dispatch(name(e.currentTarget.value));
     }
   };
   return { search, onInputChange, onSearch, updateQuery };

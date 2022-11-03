@@ -1,4 +1,4 @@
-import { CAT } from 'context/home/HomeContext';
+import { CAT } from 'interfaces/API';
 import { Episode } from 'interfaces/episode.interface';
 
 export function isEpisode(data: CAT[] | null): data is Episode[] {

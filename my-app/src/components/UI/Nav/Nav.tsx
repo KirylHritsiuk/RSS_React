@@ -3,10 +3,10 @@ import cn from 'classnames';
 import { NavLink } from 'react-router-dom';
 import { useCategory } from 'Hook/useCategory';
 import { getCardById } from 'pages/Details/helpers/getCardById';
-import { initialState } from 'context/home/HomeContext';
+import { reset } from 'store/slices/Home/HomeSlice';
 
 export const Nav = () => {
-  const { params, state, setCategory, dispatch } = useCategory();
+  const { params, state, dispatch } = useCategory();
   const card = getCardById(params, state);
   const setActive = ({ isActive }: { isActive: boolean }) => {
     return isActive ? cn(styles.link, styles.activeLink) : styles.link;
@@ -30,12 +30,7 @@ export const Nav = () => {
           </li>
         )}
         <li>
-          <NavLink
-            className={setActive}
-            end
-            to="/"
-            onClick={() => dispatch({ type: 'reset', payload: initialState })}
-          >
+          <NavLink className={setActive} end to="/" onClick={() => dispatch(reset())}>
             Home
           </NavLink>
         </li>

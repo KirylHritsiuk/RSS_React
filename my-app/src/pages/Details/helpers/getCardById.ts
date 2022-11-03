@@ -1,5 +1,5 @@
-import { CAT, HomeState } from 'context/home/HomeContext';
 import { Params } from 'react-router-dom';
+import { CAT, HomeState } from 'store/slices/Home/types';
 
 export const getCardById = (paramId: Readonly<Params<string>>, state: HomeState<CAT>) => {
   const id = paramId.id;

@@ -1,6 +1,7 @@
 import { CardEpisodeLocation, Htag } from 'components';
 import { CardCharacter } from 'components';
-import { CAT, Categories } from 'context/home/HomeContext';
+import { CAT } from 'interfaces/API';
+import { Categories } from 'store/slices/Home/types';
 import { isCharacter } from './isCharacter';
 import { isEpisode } from './isEpisode';
 import { isLocation } from './isLocation';

@@ -1,4 +1,4 @@
-import { CAT } from 'context/home/HomeContext';
+import { CAT } from 'interfaces/API';
 import { Location } from 'interfaces/location.interface';
 
 export function isLocation(data: CAT[] | null): data is Location[] {

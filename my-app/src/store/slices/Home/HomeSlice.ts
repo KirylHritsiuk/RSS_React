@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk, AnyAction } from '@reduxjs/toolkit';
 import { getResponseData } from 'components/CardList/helpers/getResponseData';
-import { APIResponse } from 'interfaces/API';
-import { GLOBAL_URL } from 'utils/url';
-import { CAT, Categories, HomeState } from './types';
+import { getPage } from 'components/UI/Pagination/helpers/getPage';
+import { APIResponse, category } from 'interfaces/API';
+import { CAT, Categories, gender, HomeState, status } from './types';
 
 export const initialState: HomeState<CAT> = {
   url: 'https://rickandmortyapi.com/api/',
@@ -14,7 +14,6 @@ export const initialState: HomeState<CAT> = {
   },
   category: null,
   loading: true,
-  error: null,
   data: {
     cards: null,
     error: null,
@@ -27,12 +26,9 @@ export const initialState: HomeState<CAT> = {
 
 export const fetching = createAsyncThunk<Categories<CAT>, string, { rejectValue: string }>(
   'HomeCards/fetching',
-  async (path = '', { rejectWithValue }) => {
+  async (url, { rejectWithValue }) => {
     try {
-      const res = await fetch(`${GLOBAL_URL}${path}`);
-      if (!res.ok) {
-        throw new Error('ServerError');
-      }
+      const res = await fetch(url);
       const data: APIResponse<CAT> = await res.json();
       return getResponseData(data);
     } catch (error) {
@@ -45,24 +41,24 @@ const HomeSlice = createSlice({
   name: 'HomeCards',
   initialState,
   reducers: {
-    category(state, action: PayloadAction<HomeState<CAT>>) {
-      state.category = action.payload.category;
+    updateCategory(state, action: PayloadAction<category | null>) {
+      state.category = action.payload;
     },
 
-    data(state, action: PayloadAction<HomeState<CAT>>) {
-      state.data = action.payload.data;
+    name(state, action: PayloadAction<string>) {
+      state.filter.name = action.payload;
     },
 
-    loading(state, action: PayloadAction<HomeState<CAT>>) {
-      state.loading = action.payload.loading;
+    data(state, action: PayloadAction<Categories<CAT>>) {
+      state.data = action.payload;
     },
 
-    status(state, action: PayloadAction<HomeState<CAT>>) {
-      state.filter.status = action.payload.filter.status;
+    updateStatus(state, action: PayloadAction<status>) {
+      state.filter.status = action.payload;
     },
 
-    gender(state, action: PayloadAction<HomeState<CAT>>) {
-      state.filter.gender = action.payload.filter.gender;
+    updateGender(state, action: PayloadAction<gender>) {
+      state.filter.gender = action.payload;
     },
 
     reset() {
@@ -73,18 +69,23 @@ const HomeSlice = createSlice({
     builder
       .addCase(fetching.pending, (state) => {
         state.loading = true;
-        state.error = null;
         state.data.error = null;
       })
       .addCase(fetching.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
+        state.filter.page = getPage(action.payload.prev);
+      })
+      .addMatcher(isError, (state, action: PayloadAction<string>) => {
+        state.loading = false;
+        state.data.error = action.payload;
       });
-    // .addCase(fetching.rejected, (state, action) => {
-    //   state.error = action.error;
-    // });
   },
 });
 
+function isError(action: AnyAction) {
+  return action.type.endsWith('rejected');
+}
+
 export default HomeSlice.reducer;
-export const { data, loading, status, gender, reset } = HomeSlice.actions;
+export const { updateCategory, data, name, updateStatus, updateGender, reset } = HomeSlice.actions;

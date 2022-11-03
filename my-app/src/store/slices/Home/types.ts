@@ -28,6 +28,5 @@ export interface HomeState<T> {
   filter: Filter;
   category: category | null;
   loading: boolean;
-  error: string | null;
   data: Categories<T>;
 }

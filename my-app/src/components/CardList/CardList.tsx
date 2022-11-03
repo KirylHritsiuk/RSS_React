@@ -1,4 +1,4 @@
-import { Htag, Loader, Pagination } from 'components';
+import { Loader, Pagination } from 'components';
 import { CardListProps } from './CardList.props';
 import styles from './CardList.module.css';
 import cn from 'classnames';
@@ -10,15 +10,10 @@ export const CardList = ({ className }: CardListProps): JSX.Element => {
 
   return (
     <>
-      {state.error && (
-        <Htag className={styles.error} tag="h2">
-          {state.error}
-        </Htag>
-      )}
       <div className={cn(styles.cardList, className)}>
         {state.loading ? <Loader /> : getCards(state.data)}
       </div>
-      {!!state.data.pages && !state.loading && <Pagination state={state} changePage={changePage} />}
+      {!state.data.error && !state.loading && <Pagination state={state} changePage={changePage} />}
     </>
   );
 };

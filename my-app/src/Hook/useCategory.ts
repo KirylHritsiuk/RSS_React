@@ -1,37 +1,32 @@
-import { HomeContext } from 'context/home/HomeContext';
 import { category } from 'interfaces/API';
-import { useContext, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useCallback, useEffect } from 'react';
+import { redirect, useParams } from 'react-router-dom';
+import { updateCategory } from 'store/slices/Home/HomeSlice';
+import useHome from './useHome';
 
 export const useCategory = () => {
-  const { state, dispatch } = useContext(HomeContext);
+  const { state, dispatch } = useHome();
   const params = useParams();
-  const setCategory = (category?: category | string) => {
-    switch (category) {
-      case 'character':
-      case 'episode':
-      case 'location':
-        if (params.category === category) {
-          dispatch({
-            type: 'category',
-            payload: { category: params.category },
-          });
-        } else {
-          dispatch({
-            type: 'category',
-            payload: { category: category },
-          });
-        }
-        break;
-      default:
-        if (category === undefined) {
-          dispatch({
-            type: 'category',
-            payload: { category: null },
-          });
-        }
-    }
-  };
+  const setCategory = useCallback(
+    (category?: category | string) => {
+      switch (category) {
+        case 'character':
+        case 'episode':
+        case 'location':
+          if (params.category === category) {
+            dispatch(updateCategory(category));
+          } else {
+            redirect('/');
+          }
+          break;
+        default:
+          if (category === undefined) {
+            dispatch(updateCategory(null));
+          }
+      }
+    },
+    [dispatch, params.category]
+  );
   useEffect(() => {
     if (
       params.category === 'character' ||

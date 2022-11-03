@@ -1,10 +1,11 @@
-import { HomeContext, initialState } from 'context/home/HomeContext';
 import { getCardById } from 'pages/Details/helpers/getCardById';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { reset } from 'store/slices/Home/HomeSlice';
+import useHome from './useHome';
 
 export const useCardNavigate = () => {
-  const { state, dispatch } = useContext(HomeContext);
+  const { state, dispatch } = useHome();
   const params = useParams();
   const url = useLocation();
 
@@ -13,7 +14,7 @@ export const useCardNavigate = () => {
   const goBack = () => navigate(-1);
   const goHome = () => {
     navigate('/', { replace: true });
-    dispatch({ type: 'reset', payload: initialState });
+    dispatch(reset());
   };
 
   useEffect(() => {

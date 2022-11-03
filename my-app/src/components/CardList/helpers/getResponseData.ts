@@ -1,7 +1,7 @@
-import { Categories } from 'context/home/HomeContext';
-import { APIResponse } from 'interfaces/API';
+import { APIResponse, CAT } from 'interfaces/API';
+import { Categories } from 'store/slices/Home/types';
 
-export const getResponseData = <T>(responseData: APIResponse<T>): Categories<T> => {
+export const getResponseData = <T extends CAT>(responseData: APIResponse<T>): Categories<T> => {
   if (responseData instanceof Array) {
     return {
       cards: responseData,

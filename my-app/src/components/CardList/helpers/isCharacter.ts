@@ -1,4 +1,4 @@
-import { CAT } from 'context/home/HomeContext';
+import { CAT } from 'interfaces/API';
 import { Character } from 'interfaces/character.interface';
 
 export function isCharacter(data: CAT[] | null): data is Character[] {

@@ -1,4 +1,5 @@
-import { gender, status } from 'context/home/HomeContext';
+import { updateGender, updateStatus } from 'store/slices/Home/HomeSlice';
+import { gender, status } from 'store/slices/Home/types';
 import { useFetching } from './useFetching';
 import { useUrl } from './useUrl';
 
@@ -8,13 +9,10 @@ export const useUpdateFilter = () => {
 
   const updateFilter = (e: React.ChangeEvent<HTMLInputElement>, label: 'status' | 'gender') => {
     const item = e.target.value as gender | status;
-    dispatch({
-      type: label,
-      payload: { filter: { [label]: item } },
-    });
 
     switch (label) {
       case 'gender':
+        dispatch(updateGender(item as gender));
         if (e.target.value !== 'All') {
           const urlGender = createURL(undefined, undefined, undefined, item as gender);
           changePage(urlGender);
@@ -24,6 +22,7 @@ export const useUpdateFilter = () => {
         break;
 
       case 'status':
+        dispatch(updateStatus(item as status));
         if (e.target.value !== 'All') {
           const urlStatus = createURL(undefined, undefined, undefined, undefined, item as status);
           changePage(urlStatus);
