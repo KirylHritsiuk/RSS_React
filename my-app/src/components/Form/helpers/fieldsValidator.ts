@@ -11,7 +11,7 @@ export const fieldsValidator = {
       message: "Please correct, it's too long",
     },
     pattern: {
-      value: /^[A-Za-z]+$/,
+      value: /^[A-Za-zА-Яа-я]+$/,
       message: "Please correct, it's no valid data",
     },
   },

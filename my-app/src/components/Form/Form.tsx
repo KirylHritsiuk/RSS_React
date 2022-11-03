@@ -11,9 +11,12 @@ import { IFormCard } from './FormCard/FormCard.interface';
 import { fieldsValidator } from './helpers/fieldsValidator';
 import { getMaxDate, getMinDate } from './helpers/getDateParams';
 import { useSuccess } from 'Hook/useSuccess';
+import { useAppDispatch } from 'Hook';
+import { addCard } from 'store/slices/FormSlice';
 
-export const Form = ({ className, addCard, title, ...props }: FormProps): JSX.Element => {
+export const Form = ({ className, title, ...props }: FormProps): JSX.Element => {
   const { success, viewSuccess } = useSuccess();
+  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -33,7 +36,7 @@ export const Form = ({ className, addCard, title, ...props }: FormProps): JSX.El
       gender: getGender(data.gender),
     });
     reset();
-    if (addCard) addCard(card);
+    dispatch(addCard(card));
     viewSuccess();
   };
 

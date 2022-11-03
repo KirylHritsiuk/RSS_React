@@ -1,14 +1,13 @@
-import { useContext } from 'react';
 import { Form, FormList, Htag } from '../../components';
 import { FormPageProps } from './FormPage.props';
 import styles from './FormPage.module.css';
-import { FormContext } from 'context/form/FormContext';
+import { useAppSelector } from 'Hook';
 
 const FormPage = ({}: FormPageProps) => {
-  const { cards, addCard } = useContext(FormContext);
+  const cards = useAppSelector((state) => state.FormCards.cards);
 
   return (
-    <div className={styles.main} data-testid="form-page">
+    <div className={styles.main}>
       {cards.length !== 0 ? (
         <FormList cards={cards} />
       ) : (
@@ -17,7 +16,7 @@ const FormPage = ({}: FormPageProps) => {
         </Htag>
       )}
       <div className={styles.form}>
-        <Form addCard={addCard} title="user form" className={styles.form} />
+        <Form title="user form" className={styles.form} />
       </div>
     </div>
   );
