@@ -2,9 +2,6 @@ import { category } from 'interfaces/API';
 import { Character } from 'interfaces/character.interface';
 import { Episode } from 'interfaces/episode.interface';
 import { Location } from 'interfaces/location.interface';
-import { createContext, Dispatch } from 'react';
-import { Action } from './reducer';
-import { GLOBAL_URL } from 'utils/url';
 
 export type CAT = Character | Location | Episode;
 
@@ -18,6 +15,7 @@ export interface Categories<T> {
 }
 export type gender = 'Female' | 'Male' | 'Genderless' | 'unknown' | 'All';
 export type status = 'Dead' | 'Alive' | 'unknown' | 'All';
+
 export interface Filter {
   name?: string;
   gender?: gender;
@@ -26,44 +24,10 @@ export interface Filter {
 }
 
 export interface HomeState<T> {
-  url: string;
+  url: 'https://rickandmortyapi.com/api/';
   filter: Filter;
   category: category | null;
   loading: boolean;
   error: string | null;
   data: Categories<T>;
 }
-
-export const initialState: HomeState<CAT> = {
-  url: GLOBAL_URL,
-  filter: {
-    name: '',
-    gender: 'All',
-    status: 'All',
-    page: 1,
-  },
-  category: null,
-  loading: true,
-  error: null,
-  data: {
-    cards: null,
-    error: null,
-    pages: null,
-    count: null,
-    prev: null,
-    next: null,
-  },
-};
-
-export const init = (state: Required<HomeState<CAT>>) => {
-  return { ...state };
-};
-export interface HomeContext<T> {
-  state: HomeState<T>;
-  dispatch: Dispatch<Action<T>>;
-}
-
-export const HomeContext = createContext<HomeContext<CAT>>({
-  state: initialState,
-  dispatch: () => {},
-});

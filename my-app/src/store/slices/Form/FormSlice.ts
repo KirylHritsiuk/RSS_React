@@ -1,9 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IFormCard } from 'components/Form/FormCard/FormCard.interface';
-
-interface IFormCardState {
-  cards: IFormCard[];
-}
+import { IFormCardState } from './types';
 
 const initialState: IFormCardState = {
   cards: [],

@@ -12,7 +12,7 @@ import { fieldsValidator } from './helpers/fieldsValidator';
 import { getMaxDate, getMinDate } from './helpers/getDateParams';
 import { useSuccess } from 'Hook/useSuccess';
 import { useAppDispatch } from 'Hook';
-import { addCard } from 'store/slices/FormSlice';
+import { addCard } from 'store/slices/Form/FormSlice';
 
 export const Form = ({ className, title, ...props }: FormProps): JSX.Element => {
   const { success, viewSuccess } = useSuccess();
