@@ -27,11 +27,6 @@ export const useFetching = <T extends CAT>() => {
     [url]
   );
 
-  useEffect(() => {
-    fetching();
-    return () => dispatch({ type: 'loading', payload: { loading: true } });
-  }, [url]);
-
   const changePage = (url: string) => {
     dispatch({ type: 'loading', payload: { loading: true } });
     fetching(url);
