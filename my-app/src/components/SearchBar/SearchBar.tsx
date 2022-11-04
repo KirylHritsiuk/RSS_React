@@ -26,9 +26,9 @@ export const SearchBar = ({}: SearchBarProps): JSX.Element => {
         </Button>
       </div>
       {category === 'character' && (
-        <>
+        <div className={styles.filter}>
           <Filter
-            className={styles.filter}
+            className={styles.gender}
             label="gender"
             names={['All', 'Male', 'Female', 'Genderless', 'unknown']}
             type={'radio'}
@@ -36,14 +36,14 @@ export const SearchBar = ({}: SearchBarProps): JSX.Element => {
             updateFilter={(e) => updateFilter(e, 'gender')}
           />
           <Filter
-            className={styles.filter}
+            className={styles.status}
             label="status"
             names={['All', 'Dead', 'Alive', 'unknown']}
             type={'radio'}
             checked={state.filter.status}
             updateFilter={(e) => updateFilter(e, 'status')}
           />
-        </>
+        </div>
       )}
     </div>
   );

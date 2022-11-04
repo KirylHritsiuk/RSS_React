@@ -50,7 +50,20 @@
 
 .filter {
 	display: flex;
-	flex-direction: row;
+	width: 100%;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.gender {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+.status {	
+	display: flex;
+	justify-content: center;
 	gap: 20px;
 }
 
@@ -59,14 +72,26 @@
 	   width: 90%;
 	}
 }
-@media screen and (max-width: 541px) {
+
+@media screen and (max-width: 589px) {
 	.search {
 		display: flex;
 		position: relative;
 		flex-direction: column;
 		gap: 10px
 	}
-	.filter {
+	.filter, .gender, .status {
 		gap: 10px;
+	}
+}
+
+@media screen and (max-width: 535px) {
+	.filter {
+		flex-direction: row;
+		justify-content: center;
+		gap: 40px;
+	}
+	.gender, .status {
+		display: block;
 	}
 }

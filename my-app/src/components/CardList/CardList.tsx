@@ -4,9 +4,14 @@ import styles from './CardList.module.css';
 import cn from 'classnames';
 import { useFetching } from 'Hook/useFetching';
 import { getCards } from './helpers/getCard';
+import { useEffect } from 'react';
 
 export const CardList = ({ className }: CardListProps): JSX.Element => {
-  const { state, changePage } = useFetching();
+  const { state, changePage, fetching, dispatch, url } = useFetching();
+
+  useEffect(() => {
+    dispatch(fetching(url));
+  }, []);
 
   return (
     <>
