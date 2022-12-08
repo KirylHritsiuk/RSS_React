@@ -1,0 +1,97 @@
+.searchBar {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+
+	margin: 0 auto;
+	padding: 10px;
+
+	background-color: aqua;
+	
+	border-radius: 30px;
+	
+	min-width: 290px;
+	max-width: 800px;
+	width: 100%;
+}
+
+.search {
+	display: flex;
+	position: relative;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: 10px;
+
+	width: 100%
+}
+
+.searchInput {
+	display: block;
+	height: 35px;
+
+	border-radius: 30px;
+
+	padding: 5px;
+    padding-left:35px;
+
+	font-size: 20px;
+
+	width: 100%;
+
+}
+.search svg {
+	position: absolute;
+	left: 10px;
+	top: 6px;
+	opacity: 0.7;
+}
+
+.filter {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.gender {
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+.status {	
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+
+@media screen and (max-width: 840px) {
+	.searchBar {
+	   width: 90%;
+	}
+}
+
+@media screen and (max-width: 589px) {
+	.search {
+		display: flex;
+		position: relative;
+		flex-direction: column;
+		gap: 10px
+	}
+	.filter, .gender, .status {
+		gap: 10px;
+	}
+}
+
+@media screen and (max-width: 535px) {
+	.filter {
+		flex-direction: row;
+		justify-content: center;
+		gap: 40px;
+	}
+	.gender, .status {
+		display: block;
+	}
+}
