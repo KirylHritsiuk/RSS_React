@@ -1,0 +1,41 @@
+.card {
+	display: grid;
+	grid-template-rows: 1fr max-content max-content max-content max-content;
+	align-items: flex-start;
+	justify-items: center;
+
+	box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+	padding: 10px;
+	width: 300px;
+	height: 360px;
+	gap: 10px;
+
+	background: white;
+}
+
+.card:hover {
+	transform: scale(1.02);
+	transition: all 0.3s;
+}
+
+.image {
+	width: 280px;
+	height: 150px;
+}
+.image img {
+	width: 280px;
+	height: 150px;
+	object-fit: contain;
+}
+
+.title {
+	margin: 0;
+}
+
+.button {
+	justify-self: end;
+
+	font-weight: bold;
+}
+
