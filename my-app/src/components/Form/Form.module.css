@@ -1,0 +1,79 @@
+.form {
+	position: relative;
+	display: grid;
+	grid-auto-rows: auto;
+	align-items: center;
+	gap: 25px;
+	width: 50%;
+	margin: 0 auto;
+	border-radius: 20px;
+	box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
+	padding: 25px 40px;
+	margin-bottom: 20px;
+}
+
+.title {
+	margin: 0;
+}
+
+.file input {
+	cursor: pointer;
+	box-shadow: none;
+	padding: 0;
+}
+
+.agree label {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-end;
+	gap: 10px;
+	align-items: center;
+}
+.agree input {
+	width: 20px;
+	height: 20px;
+	box-shadow: none;
+}
+
+.agree h3 {
+	user-select: none;
+	cursor: pointer;
+	text-transform: none;
+}
+.none{
+	display: none;
+}
+.success {
+	position: absolute;
+	bottom: 2px;
+	left: calc(100%/2 - 50px);
+	color: var(--green);
+	background: var(--green-light);
+	width: 100px;
+	border-radius: 10px;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 600;
+	transition: all 0.4s;
+}
+@media screen and (max-width: 768px) {
+	.form {
+		width: 70%;
+	}
+}
+
+@media screen and (max-width: 541px) {
+	.form {
+		width: 90%;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.form {
+		width: 95%;
+		padding: 5px 10px;
+	}
+	.success {
+		bottom: -16px;
+	}
+}

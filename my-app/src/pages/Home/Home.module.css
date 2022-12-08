@@ -1,0 +1,8 @@
+.home {
+	display: grid;
+
+	grid-template-rows: max-content 1fr max-content;
+	align-items: center;
+	padding: 0 1%;
+	gap: 10px;
+}

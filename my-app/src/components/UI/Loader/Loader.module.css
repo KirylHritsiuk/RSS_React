@@ -1,0 +1,14 @@
+.loader {
+    font-weight: bold;
+    display: inline-block;
+    font-family: monospace;
+    font-size: 30px;
+    clip-path: inset(0 3ch 0 0);
+    animation: load 1.5s steps(5) infinite;
+}
+
+@keyframes load {
+    to {
+      clip-path: inset(0 -1ch 0 0)
+    }
+  }
