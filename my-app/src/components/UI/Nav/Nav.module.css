@@ -1,0 +1,21 @@
+.menu {
+	display: flex;
+	gap: 20px;
+}
+
+.link {
+	font-size: large;
+	line-height: 26px;
+	font-weight: 500;
+	color: var(--black);
+	flex-grow: 1;
+	transition: all 0.3s;
+}
+
+.link:hover {
+	color: var(--primary-hover);
+}
+
+.activeLink {
+	color: var(--primary);
+}

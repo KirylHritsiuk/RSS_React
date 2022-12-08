@@ -1,0 +1,102 @@
+.card {
+	position: relative;
+	display: grid;
+	grid-template-rows: max-content max-content max-content;
+	align-items: flex-start;
+	box-shadow: 0 0 12px 1px rgba(0, 0, 0, 0.5);
+	border-radius: 10px;
+	padding-bottom: 5px;
+	gap: 5px;
+
+	background: var(--white);
+
+	cursor: pointer;
+
+	width: 300px;
+	height: 350px;
+}
+
+.card:hover {
+	transform: scale(1.01);
+	transition: all 0.4s;
+}
+
+.card:hover .buttonWrapper{
+	transition: all 0.3s;
+	backdrop-filter: blur(8px)
+	
+}
+.card:hover .button {
+	transition: all 0.7s;
+	opacity: 1;
+}
+
+.image {
+	width: 300px;
+	height: 300px;
+	background: url(../../../../public/svg/avatar.svg) center center no-repeat;
+}
+
+.image img {
+	object-fit: contain;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.title {
+	margin: 0;
+	justify-self: center;
+	align-self: flex-end;
+}
+
+.buttonWrapper {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border-radius: 10px;
+}
+
+.button {
+	font-weight: bold;
+	border-radius: 10px;
+	background-color: var(--white);
+	opacity: 0;
+}
+
+.modal {
+	position: relative;
+}
+
+.modal button {
+	position: absolute;
+	right: 5px;
+	top: 5px;
+	padding: 0;
+	width: 25px;
+	height: 25px;
+	border-radius: 50%;
+	border: none;
+}
+
+.modal h2 {
+	margin-top: 0;
+	line-height: 22px;
+	font-size: 30px;
+}
+
+.modalContent {
+	display: flex;
+	flex-direction: row;
+	gap: 10px;
+}
+
+.modalContent img {
+	width: 150px;
+	height: 150px;
+}
