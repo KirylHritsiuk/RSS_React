@@ -1,0 +1,22 @@
+.main {
+	display: grid;
+	grid-template-columns: 1fr 400px;
+	padding: 0 3%;
+	height: 100%;
+}
+
+.form {
+	height: 600px;
+}
+
+.noCard {
+	text-align: center;
+}
+
+@media screen and (max-width: 769px) {
+	.main {
+		display: flex;
+		flex-direction: column-reverse;
+		gap: 20px;
+	}
+}

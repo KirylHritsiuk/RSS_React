@@ -1,0 +1,11 @@
+.filter {
+	font-weight: 500;
+	font-style: italic;
+}
+.item {
+	display: flex;
+	flex-direction: row;
+	gap: 5px;
+
+	cursor: pointer;
+}
